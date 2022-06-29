@@ -52,7 +52,8 @@ function _createMail
     body = utilService.makeLorem(utilService.getRandomInt(15, 20)),
     isRead = false,
     sentAt = Date.now(),
-    to = 'momo@momo.com'
+    to = 'momo@momo.com',
+    isStarred = false
   ) {
     return {
         id,
@@ -60,7 +61,8 @@ function _createMail
         body,
         isRead,
         sentAt,
-        to
+        to,
+        isStarred
     }
    
 }
