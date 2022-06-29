@@ -8,11 +8,11 @@ export const keepService = {
   query,
   remove,
   save,
-  getEmptybook,
+  getEmptyKeep,
   get,
   addReview,
   getReviews,
-  getBooksFromGoogle,
+  getKeepsFromGoogle,
   saveChangedKeep,
 };
 
@@ -21,28 +21,28 @@ function query() {
   // return utilService.loadFromStorage(KEEP_KEY);
 }
 
-function remove(bookId) {
+function remove(keepId) {
   // return Promise.reject('Big Error Badd')
-  return storageService.remove(KEEP_KEY, bookId);
+  return storageService.remove(KEEP_KEY, keepId);
 }
 
-function get(bookId) {
-  return storageService.get(KEEP_KEY, bookId);
+function get(keepId) {
+  return storageService.get(KEEP_KEY, keepId);
 }
 
-function save(book) {
-  if (book.id) return storageService.put(KEEP_KEY, book);
-  else return storageService.post(KEEP_KEY, book);
+function save(keep) {
+  if (keep.id) return storageService.put(KEEP_KEY, keep);
+  else return storageService.post(KEEP_KEY, keep);
 }
 function saveChangedKeep(keep){
   return storageService.put(KEEP_KEY, keep)
 }
 
-function getReviews(bookId) {
-  return storageService.query(bookId);
+function getReviews(keepId) {
+  return storageService.query(keepId);
 }
 
-function getEmptybook() {
+function getEmptyKeep() {
   return {
     id: "",
     vendor: "",
@@ -55,25 +55,6 @@ function getEmptybook() {
       isOnSale: false,
     },
   };
-}
-
-function getBooksFromGoogle(searchKey) {
-  return storageService.query("google-books")
-  .then(() => axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchKey}`))
-  .then(res => res.data.items)
-  .then(books => storageService.postMany("google-books", books))
-}
-function _createbook(vendor, maxSpeed = 250) {
-  const book = {
-    id: utilService.makeId(),
-    vendor,
-    maxSpeed,
-  };
-  return book;
-}
-
-function addReview(bookId, review) {
-  storageService.post(bookId, review);
 }
 
 function _createKeeps() {
