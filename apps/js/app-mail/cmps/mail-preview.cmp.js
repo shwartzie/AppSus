@@ -1,23 +1,27 @@
+import longText from "./long-text.cmp.js";
 export default {
-    props: ["book"],
+    props: ["mail"],
     template: `
-    <div  class="book">
-    <img :src="bookImgUrl" alt="">
-
-    <p>{{book.title}}</p>
-    <p :class="checkPrice">{{book.listPrice.amount}} {{book.listPrice.currencyCode}}</p>
-    </div>
+    <main class="mail-content">
+        <div class="mail">
+            <div class="mail-body">
+                {{mail.body}} 
+                <long-text :text="mail.body"/>
+            </div>
+            <div class="mail-subject">
+                {{mail.subject}} 
+            </div>
+        </div>
+    </main>
 `,
     data() {
-        return {}
+        return {};
     },
+    created() { },
     methods: {},
-    computed: {
-        bookImgUrl() {
-            return `${this.book.thumbnail}`
-        },
-        checkPrice() {
-            return { low: this.book.listPrice.amount < 20, high: this.book.listPrice.amount > 150 }
-        },
-    },
-}
+    computed: {},
+    unmounted() { },
+    components: {
+        longText
+    }
+};

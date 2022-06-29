@@ -1,0 +1,35 @@
+.aside {
+    flex-direction: row-reverse;
+    max-width: 100px;
+    max-height: 165px;
+    width: 100%;
+    height: 100%;
+}
+.aside, .aside-funcs {
+    display: flex;
+}
+.aside-funcs {
+    flex-direction: column;
+    
+}
+.aside-funcs > a {
+    color: #202124;
+}
+
+.compose {
+    border-radius: 10px;
+    border: 1px black solid;
+    padding: 1em;
+    margin-bottom: 0.5em;
+    text-decoration: none;
+}
+.btn-mail-aside {
+    padding: 0.7em;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-mail-aside:hover, .btn-mail-aside:active {
+    border-radius: 6.25em 0px 0px 6.25em;
+    background-color: rgba(220, 86, 86, 0.593);
+    color: #d93025;
+}

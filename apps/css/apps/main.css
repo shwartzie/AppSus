@@ -3,6 +3,22 @@
 /* app-header , app-footer */
 @import './mail-app/cmps/mail-header.css';
 @import './keep-app/parts/base.css';
+@import './mail-app/cmps/filter-mail.css';
+@import './mail-app/cmps/mail-aside.cmp.css';
+@import './mail-app/cmps/mail-conent.css';
+@import './mail-app/cmps/mail-preview.css';
+@import './mail-app/cmps/mail-list.css';
+
+body {
+  height: 100vh;
+  color: #202124;
+}
+
+.mail-layout {
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+}
 .app-footer {
   background: rgb(76, 140, 255);
     background: linear-gradient(90deg, rgba(76, 140, 255, 1) 0%, rgba(0, 237, 187, 0.6362920168067228) 100%);

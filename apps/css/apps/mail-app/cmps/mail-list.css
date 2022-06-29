@@ -1,0 +1,11 @@
+.star-active,.mail-star:hover {
+    color: yellow;
+}
+.mail-star {
+    font-size: 1.5em;
+    border: none;
+}
+
+.mail-ul {
+    display: block;
+}
