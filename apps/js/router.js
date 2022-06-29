@@ -4,6 +4,7 @@ import aboutPage from "./app-book/views/about-page.cmp.js"
 import bookDetails from "./app-book/views/book-details.cmp.js"
 import bookEdit from "./app-book/views/book-edit.cmp.js"
 import mailApp from './app-mail/views/mail-app.cmp.js'
+import keepApp from './app-keep/views/keep-app.cmp.js'
 const routes = [
     {
         path: "/",
@@ -28,7 +29,11 @@ const routes = [
     {
         path: '/mail',
         component: mailApp
-    }
+    },
+    {
+        path: '/keep',
+        component: keepApp
+    },
 ]
 
 export const router = VueRouter.createRouter({
