@@ -20,7 +20,7 @@ export default {
                 <img :src="book.thumbnail" alt="">
                 <p>{{book.listPrice.amount}} {{book.listPrice.currencyCode}}</p>
                 <button @click="$router.back">Back</button>
-                <form @submit.prevent="save">
+                <form @submit.prevent="save" class="book-review">
                     <input placeholder="your name" type="text" v-model="review.userName" ref="titleInput">
         <select v-model="review.rate">
             <option value="⭐">⭐</option>
