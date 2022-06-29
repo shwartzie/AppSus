@@ -48,32 +48,30 @@ export default {
     methods: {
         openType(type) {
             this.keepType = type
-            console.log(this.keepType);
         },
         save() {
-            console.log(this.keep);
-            keepService.save(this.keep)
-
+            this.$emit("add", this.keep)
+            
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
 
         },
         inputFreeText() {
-            this.keep.typeOfKeep = 'text'
+            this.keep.type = 'text'
             this.keep.contentOfType = this.$refs.freeTxtInput.innerText
+            console.log(this.keep);
         },
-        inputImgUrl(value) {
-            this.keep.typeOfKeep = 'img'
-            console.log(this.$refs.imgInput.innerText);
+        inputImgUrl() {
+            this.keep.type = 'img'
             this.keep.contentOfType = this.$refs.imgInput.innerText
         },
-        inputVidUrl(value) {
-            this.keep.typeOfKeep = 'video'
+        inputVidUrl() {
+            this.keep.type = 'video'
             this.keep.contentOfType = this.$refs.vidInput.innerText
         },
         inputTodoList() {
-            this.keep.typeOfKeep = 'todo'
+            this.keep.type = 'todo'
             this.keep.contentOfType = this.$refs.todoInput.innerText
         },
     },

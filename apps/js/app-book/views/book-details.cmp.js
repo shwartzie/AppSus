@@ -64,7 +64,6 @@ export default {
     appFooter,
   },
   created() {
-    console.log(this.$route);
     const { bookId: id } = this.$route.params;
     bookService.get(id).then((book) => (this.book = book));
     this.loadReviews(id);
@@ -74,7 +73,6 @@ export default {
       if (!this.userName) {
         this.userName = "user Name";
       }
-      console.log(this.review);
       bookService.addReview(this.book.id, this.review);
       this.reviews.push(this.review);
       eventBus.emit("show-msg", { txt: "added review successfully", type: "success" });
@@ -88,13 +86,11 @@ export default {
       bookService
         .remove(id)
         .then(() => {
-          console.log("Deleted successfully");
           const idx = this.reviews.findIndex((reviews) => reviews.id === id);
           this.reviews.splice(idx, 1);
           eventBus.emit("show-msg", { txt: "Deleted successfully", type: "success" });
         })
         .catch((err) => {
-          console.log(err);
           eventBus.emit("show-msg", { txt: "Error - try again later", type: "error" });
         });
     },

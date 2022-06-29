@@ -10,7 +10,7 @@ export default {
     <section class="keeps">
       <keep-aside/>
       <section class="main-content">
-        <keep-add/>
+        <keep-add @add="addkeep"/>
         
         <keep-list :keeps="keepsForDisplay" @remove="removekeep"/>
       </section>
@@ -32,7 +32,6 @@ export default {
   },
   created() {
     keepService.query().then((keeps) => {
-      console.log(keeps);
       this.keeps = keeps
     });
   },
@@ -41,16 +40,22 @@ export default {
       keepService
         .remove(id)
         .then(() => {
-          console.log("Deleted successfully");
           const idx = this.keeps.findIndex((keep) => keep.id === id);
           this.keeps.splice(idx, 1);
           eventBus.emit("show-msg", { txt: "Deleted successfully", type: "success" });
         })
         .catch((err) => {
-          console.log(err);
           eventBus.emit("show-msg", { txt: "Error - try again later", type: "error" });
         });
     },
+    addkeep(keep){
+      console.log(keep);
+     keepService.save(keep).then(() => {
+        this.$router.push("/keep")
+        this.keeps.push(keep)
+        // eventBus.emit("show-msg", { txt: "Saved/Update successfully", type: "success" })
+      })
+    }
   },
   computed: {
     keepsForDisplay() {

@@ -25,7 +25,6 @@ export default {
     created() { },
     methods: {
         callBus() {
-            console.log('calling the bus');
             eventBus.emit('show-msg', 'hi')
         }
     },

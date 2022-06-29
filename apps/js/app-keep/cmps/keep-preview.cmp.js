@@ -8,7 +8,7 @@ export default {
     <cite contenteditable="true" ref="titleInput" @input="changeTitle(keep)">{{keep.title}}</cite>
     <p>{{keep.type}}</p>
         <div v-if="keep.type === 'img'">
-        <img :src="contentOfType" alt="">
+        <img :src="keepImgUrl" alt="">
         </div>
         <div v-else-if="keep.type === 'text'">
         <blockquote contenteditable="true" ref="freeTxtInput" @input="changeFreeText(keep)">
@@ -34,7 +34,6 @@ export default {
         clearTimeout(keepTimer)
         keepTimer=setTimeout(() => {
             keep.title=this.$refs.titleInput.innerText
-            console.log(keep.title);
             keepService.saveChangedKeep(keep)
         }, 1000)
     },
@@ -51,7 +50,6 @@ export default {
       return `${this.keep.contentOfType}`;
     },
     keepImgUrl(){
-        console.log(this.keep.url);
         return `${this.keep.contentOfType}`; 
     },
     checkPrice() {

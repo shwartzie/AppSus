@@ -8,13 +8,14 @@ export default {
                 <li v-for="keep in keeps" :key="keep.id" class="keep-preview-container" >
                 <keep-preview :keep="keep" />
                 <button @click="removeKeep(keep.id)"> X</button>
-
+                
                    <!-- <div class="actions">
                        <router-link :to="'/keep/'+keep.id">Details</router-link>
                        <router-link :to="'/keep/edit/'+keep.id">Edit</router-link>
                        <button @click="remove(keep.id)">X</button>
                     </div> -->
                 </li>
+
             </ul>
         </section>
     `,
@@ -25,7 +26,7 @@ export default {
         removeKeep(keepId){
             this.$emit("remove", keepId)
         }
-    
+        
         // select(keep) {
         //     this.$emit("selected", keep)
         // },

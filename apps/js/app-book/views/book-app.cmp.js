@@ -41,13 +41,11 @@ export default {
       bookService
         .remove(id)
         .then(() => {
-          console.log("Deleted successfully");
           const idx = this.books.findIndex((book) => book.id === id);
           this.books.splice(idx, 1);
           eventBus.emit("show-msg", { txt: "Deleted successfully", type: "success" });
         })
         .catch((err) => {
-          console.log(err);
           eventBus.emit("show-msg", { txt: "Error - try again later", type: "error" });
         });
     },
