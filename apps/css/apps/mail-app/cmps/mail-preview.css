@@ -1,0 +1,8 @@
+.mails-preview-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.mail {
+    width: 90%;
+}
