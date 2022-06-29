@@ -1,4 +1,5 @@
 import mailPreview from "../cmps/mail-preview.cmp.js";
+import { mailService } from "../services/mail-service.js"
 export default {
     props: ["mails"],
     template: `
@@ -7,7 +8,7 @@ export default {
                 <li v-for="mail in mails" :key="mail.id" class="mails-preview-container" >
                     <mail-preview :mail="mail" @click="selectedMail(mail)"/>
                     <div class="actions">
-                        <button class="mail-star" :class="onStar" @click="selectedStar = !selectedStar">✰</button>
+                        <button class="mail-star" :class="onStarActive" @click="onStar(mail, activeStar = !activeStar)">✰</button>
                         <button @click=""></button>
                     </div>
                 </li>
@@ -17,25 +18,37 @@ export default {
 `,
     data() {
         return {
-            mail: null,
-            selectedStar: false
+            activeStar: false,
+            starId: null
         };
     },
     created() { },
     methods: {
         selectedMail(mail) {
             this.$emit('selected', mail);
-            this.mail = mail
-            console.log(this.mail)
         },
+        onStar(mail, activeStar) {
+            this.starId = mail.id
+            this.activeStar = activeStar
+            console.log(this.activeStar)
+            if (activeStar) {
+                mail.isStarred = true
+                mailService.save(mail)
+            } else {
+                mail.isStarred = false
+                mailService.save(mail)
+            }
+        },
+        
+
     },
     computed: {
-        onStar() {
-            return this.selectedStar ? 'star-active' : ''
+        onStarActive() {
+            return this.activeStar ? 'star-active' : ''
         }
     },
     unmounted() { },
     components: {
-        mailPreview
+        mailPreview,
     },
 };

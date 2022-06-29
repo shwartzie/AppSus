@@ -5,7 +5,7 @@ export default {
         <div class="aside-funcs">
             <mail-compose/>
             <a class="btn-mail-aside" @click="">Inbox</a>
-            <a class="btn-mail-aside" @click="">Starred</a>
+            <a class="btn-mail-aside" @click="filter()">Starred</a>
             <a class="btn-mail-aside" @click="" >Sent Mail</a>
             <a class="btn-mail-aside" @click="">Drafts</a>
         </div>
@@ -19,7 +19,11 @@ export default {
         };
     },
     created() { },
-    methods: {},
+    methods: {
+        filter() {
+
+        }
+    },
     computed: {},
     unmounted() { },
     components: {

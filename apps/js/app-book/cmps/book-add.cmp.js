@@ -28,10 +28,8 @@ export default {
   methods: {
 
     filter() {
-      console.log(this.searchBook);
       bookService.getBooksFromGoogle(this.searchBook).then((res) => {
         this.bookResults = res
-        console.log(this.bookResults);
       })
     },
     add(bookId) {
