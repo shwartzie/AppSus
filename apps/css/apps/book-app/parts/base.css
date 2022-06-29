@@ -40,7 +40,7 @@
     border: 2px solid rgb(68, 68, 68);
     border-collapse: collapse;
   }
-  form {
+  .book-review {
     margin: auto;
     width: 30vw;
   }

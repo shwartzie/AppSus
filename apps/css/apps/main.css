@@ -2,6 +2,7 @@
 @import './book-app/cmps/app-header.css';
 /* app-header , app-footer */
 @import './mail-app/cmps/mail-header.css';
+@import './keep-app/parts/base.css';
 .app-footer {
   background: rgb(76, 140, 255);
     background: linear-gradient(90deg, rgba(76, 140, 255, 1) 0%, rgba(0, 237, 187, 0.6362920168067228) 100%);
