@@ -1,6 +1,11 @@
 export default {
-<<<<<<< HEAD
   template: `
+  <a class="btn" href="#">Compose</a>
+  <a class="btn" href="#">starred</a>
+  <a class="btn" href="#">sent</a>
+  <a class="btn" href="#">drafts</a>
+  <a class="btn" href="#">inbox</a>
+
 `,
   data() {
     return {};
@@ -10,15 +15,3 @@ export default {
   computed: {},
   unmounted() {},
 };
-=======
-    template: `
-`,
-    data() {
-        return {};
-    },
-    created() { },
-    methods: {},
-    computed: {},
-    unmounted() { },
-};
->>>>>>> 48636a6d18900f68132a0009042ac54a90b6c6ff
