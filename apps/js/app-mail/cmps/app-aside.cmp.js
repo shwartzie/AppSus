@@ -1,11 +1,11 @@
 export default {
- template: `
+  template: `
 `,
-data() {
-return {};
-},
-created() {},
-methods: {},
-computed: {},
-unmounted() {},
+  data() {
+    return {};
+  },
+  created() {},
+  methods: {},
+  computed: {},
+  unmounted() {},
 };
