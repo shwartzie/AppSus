@@ -1,6 +1,6 @@
 import { bookService } from "../services/book-service.js"
 import { eventBus } from "../services/eventBus-service.js"
-
+import { utilService } from "../services/util-service.js";
 
 export default {
   template: `
@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       searchBook: "",
-      bookResults:null,
+      bookResults: null,
     };
   },
   mounted() {
@@ -28,40 +28,47 @@ export default {
   methods: {
 
     filter() {
-        console.log(this.searchBook);
-        bookService.getBooksFromGoogle(this.searchBook).then((res)=>{
-            this.bookResults=res
-            console.log(this.bookResults);
-        })
+      console.log(this.searchBook);
+      bookService.getBooksFromGoogle(this.searchBook).then((res) => {
+        this.bookResults = res
+        console.log(this.bookResults);
+      })
     },
-    add(bookId){
-      
-        var selBook=this.bookResults.find((book)=>{
-            return book.id=bookId
-        })
-        var{volumeInfo:{title,categories,imageLinks:{thumbnail},publishedDate ,description,subtitle,pageCount,language}}=selBook
-        const googleBook = {
-            title,
-            categories,
-            thumbnail,
-            publishedDate,
-            description,
-            subtitle,
-            pageCount,
-            language,
-            thumbnail,
-            listPrice: {
-                    amount: 109,
-                    currencyCode: "EUR",
-                    isOnSale: false,
-                  },
-            
-        }
-        console.log(googleBook);
-        bookService.save(googleBook).then((book) => {
-            this.$router.push("/book")
-            eventBus.emit("show-msg", { txt: "Saved/Update successfully", type: "success" })
-        })
+    add(bookId) {
+      var selBook = this.bookResults.find((book) => book.id === bookId)
+      var { volumeInfo: { title, categories, imageLinks: { thumbnail }, publishedDate, description, subtitle, pageCount, language } } = selBook
+      const googleBook = this.setGoogleBook(title, categories, thumbnail, publishedDate, description, subtitle, pageCount, language)
+      bookService.save(googleBook).then(() => {
+        this.$router.push("/book")
+        eventBus.emit("show-msg", { txt: "Saved/Update successfully", type: "success" })
+      })
+    },
+    setGoogleBook(
+      title = 'Default Title',
+      categories = ['computers', 'data'],
+      thumbnail = './img/Subali Pesha.png',
+      publishedDate = Date.now(),
+      description = 'Default Description',
+      subtitle = 'Default Subtitle',
+      pageCount = utilService.getRandomInt(50, 300),
+      language = 'en'
+      ) {
+      return {
+        title,
+        categories,
+        thumbnail,
+        publishedDate,
+        description,
+        subtitle,
+        pageCount,
+        language,
+        listPrice: {
+          amount: utilService.getRandomInt(15, 200),
+          currencyCode: "EUR",
+          isOnSale: false,
+        },
+
+      }
     }
   },
 };
