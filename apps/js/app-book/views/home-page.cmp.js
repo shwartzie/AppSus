@@ -1,4 +1,4 @@
-import appHeader from '../cmps/app-footer.cmp.js';
+import appHeader from '../cmps/app-header.cmp.js';
 import appFooter from '../cmps/app-footer.cmp.js';
 export default {
     template: `
