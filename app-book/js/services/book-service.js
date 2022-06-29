@@ -54,20 +54,22 @@ function getEmptybook() {
 }
 
 function getBooksFromGoogle(searchKey) {
-  var books = storageService.query("google-books");
-  books.then((res) => {
-    if (res.length===0) {
-      axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchKey}`).then((res) => {
-        books = res.data.items;
-        console.log(res);
-        console.log("got from server", books);
-        storageService.postMany("google-books",books)
-
-        return books
-    });
+  return storageService.query("google-books")
+  .then(() => axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchKey}`))
+  .then(res => res.data.items)
+  .then(books => storageService.postMany("google-books", books))
 }
-});
-return books
+function _createbook(vendor, maxSpeed = 250) {
+  const book = {
+    id: utilService.makeId(),
+    vendor,
+    maxSpeed,
+  };
+  return book;
+}
+
+function addReview(bookId, review) {
+  storageService.post(bookId, review);
 }
 
 function _createBooks() {
@@ -436,15 +438,6 @@ function _createBooks() {
   return books;
 }
 
-function _createbook(vendor, maxSpeed = 250) {
-  const book = {
-    id: utilService.makeId(),
-    vendor,
-    maxSpeed,
-  };
-  return book;
-}
 
-function addReview(bookId, review) {
-  storageService.post(bookId, review);
-}
+
+
