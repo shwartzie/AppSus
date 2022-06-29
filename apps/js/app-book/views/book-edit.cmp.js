@@ -1,8 +1,11 @@
 import { bookService } from "../services/book-service.js"
 import { eventBus } from "../../../services/eventBus-service.js"
-
+import appHeader from '../cmps/app-header.cmp.js';
+import appFooter from '../cmps/app-footer.cmp.js';
 export default {
     template: `
+        <app-header />
+
         <section v-if="bookToEdit" class="book-edit app-main">
             <h4>{{pageTitle}}</h4>
             <form @submit.prevent="save">
@@ -21,7 +24,12 @@ export default {
                 <button>Save</button>
             </form>
         </section>
+        <app-footer /> 
     `,
+      components: {
+        appHeader,
+        appFooter,
+      },
     data() {
         return {
             bookToEdit: null,

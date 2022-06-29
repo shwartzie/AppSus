@@ -1,7 +1,11 @@
 import { bookService } from "../services/book-service.js";
 import { eventBus } from "../../../services/eventBus-service.js"
+import appHeader from '../cmps/app-header.cmp.js';
+import appFooter from '../cmps/app-footer.cmp.js';
 export default {
   template: `
+      <app-header />
+
         <section  v-if="book"  class="book-details app-main">
             <div class="book-detail">
                 
@@ -40,6 +44,8 @@ export default {
     </section>
 </div>
 </section>
+<app-footer /> 
+
 `,
   data() {
     return {
@@ -52,6 +58,10 @@ export default {
       },
       reviews: null,
     };
+  },
+  components: {
+    appHeader,
+    appFooter,
   },
   created() {
     console.log(this.$route);
