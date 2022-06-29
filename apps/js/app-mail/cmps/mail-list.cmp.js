@@ -5,7 +5,7 @@ export default {
     <section class="mail-list">
             <ul class="mail-ul">
                 <li v-for="mail in mails" :key="mail.id" class="mails-preview-container" >
-                    <mail-preview :mail="mail" @click="selectedMail"/>
+                    <mail-preview :mail="mail" @click="selectedMail(mail)"/>
                     <div class="actions">
                         <button class="mail-star" :class="onStar" @click="selectedStar = !selectedStar">✰</button>
                         <button @click=""></button>
@@ -26,11 +26,12 @@ export default {
         selectedMail(mail) {
             this.$emit('selected', mail);
             this.mail = mail
+            console.log(this.mail)
         },
     },
     computed: {
         onStar() {
-            return this.selectedStar ? 'star-active' : '' 
+            return this.selectedStar ? 'star-active' : ''
         }
     },
     unmounted() { },

@@ -47,8 +47,8 @@ function getEmptyMail() {
 
 function _createMail
 (
-    id = 'e101',
-    subject = 'Miss you!',
+    id = utilService.makeId(),
+    subject = utilService.makeLorem(2),
     body = utilService.makeLorem(utilService.getRandomInt(15, 20)),
     isRead = false,
     sentAt = Date.now(),
