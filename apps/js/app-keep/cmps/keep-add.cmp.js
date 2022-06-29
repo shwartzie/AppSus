@@ -1,3 +1,5 @@
+import { keepService } from "../services/keep-service.js";
+
 export default {
     template: `
     <section class="keep-input">  
@@ -7,16 +9,15 @@ export default {
                 <p class="new-keep-title">start a new keep</p>
             </blockquote>
                     <form v-if="keepType" @submit.prevent="save">
-                    <input v-if="keepType === 'img'" @input="inputImgUrl" placeholder="image url:">
+                    <cite contenteditable="true" v-if="keepType === 'img'"  ref="imgInput" @input="inputImgUrl(value)">image url:</cite>
                         
+                    <cite contenteditable="true"  v-else-if="keepType === 'video'" ref="vidInput" @input="inputVidUrl(value)">video url:</cite>
+
+                    
                         <blockquote contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keepType === 'text'">
                             <p class="free-text-input">text</p>
                         </blockquote>
-                        <input v-else-if="keepType === 'video'" @input="inputVidUrl" placeholder="video url:">
-                        
-                        <input v-else-if="keepType === 'todo'"  @input="inputVidUrl" placeholder="video url:">
-                        
-                        <blockquote contenteditable="true" ref="todoInput" @input="inputTodoList()" >
+                        <blockquote  v-else-if="keepType === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
                              <p class="new-keep-title">start a Todo</p>
                          </blockquote>
 
@@ -37,7 +38,7 @@ export default {
             keepType: null,
             keep: {
                 title: '',
-                typeOfKeep: 'text',
+                type: 'text',
                 contentOfType: '',
 
             }
@@ -51,6 +52,8 @@ export default {
         },
         save() {
             console.log(this.keep);
+            keepService.save(this.keep)
+
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
@@ -62,11 +65,12 @@ export default {
         },
         inputImgUrl(value) {
             this.keep.typeOfKeep = 'img'
-            this.keep.contentOfType = value
+            console.log(this.$refs.imgInput.innerText);
+            this.keep.contentOfType = this.$refs.imgInput.innerText
         },
         inputVidUrl(value) {
             this.keep.typeOfKeep = 'video'
-            this.keep.contentOfType = value
+            this.keep.contentOfType = this.$refs.vidInput.innerText
         },
         inputTodoList() {
             this.keep.typeOfKeep = 'todo'

@@ -10,9 +10,6 @@ export const keepService = {
   save,
   getEmptyKeep,
   get,
-  addReview,
-  getReviews,
-  getKeepsFromGoogle,
   saveChangedKeep,
 };
 
@@ -38,9 +35,6 @@ function saveChangedKeep(keep){
   return storageService.put(KEEP_KEY, keep)
 }
 
-function getReviews(keepId) {
-  return storageService.query(keepId);
-}
 
 function getEmptyKeep() {
   return {
@@ -63,7 +57,7 @@ function _createKeeps() {
     keeps=[
       {
         title:'ooga booga',
-        freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
+        contentOfType:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'text',
         id:101
       },
@@ -71,19 +65,19 @@ function _createKeeps() {
         title:'ooga booga',
         freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'video',
-        url:'https://www.youtube.com/embed/tgbNymZ7vqY',
+        contentOfType:'https://www.youtube.com/embed/tgbNymZ7vqY',
         id:102
       },
       {
         title:'ooga booga',
         freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'img',
-        url:'https://i.pinimg.com/474x/b6/0f/20/b60f20b811cbe9a73bfbc2658ff53b74.jpg',
+        contentOfType:'https://i.pinimg.com/474x/b6/0f/20/b60f20b811cbe9a73bfbc2658ff53b74.jpg',
         id:103
       },
       {
         title:'ooga booga',
-        freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
+        contentOfType:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'todo-list',
         id:104
       },

@@ -8,11 +8,11 @@ export default {
     <cite contenteditable="true" ref="titleInput" @input="changeTitle(keep)">{{keep.title}}</cite>
     <p>{{keep.type}}</p>
         <div v-if="keep.type === 'img'">
-        <img :src="keepImgUrl" alt="">
+        <img :src="contentOfType" alt="">
         </div>
         <div v-else-if="keep.type === 'text'">
         <blockquote contenteditable="true" ref="freeTxtInput" @input="changeFreeText(keep)">
-        <p>{{keep.freeText}}</p>
+        <p>{{keep.contentOfType}}</p>
         </blockquote>
         </div>
         <div v-else-if="keep.type === 'video'">
@@ -48,11 +48,11 @@ export default {
   },
   computed: {
     keepVidUrl() {
-      return `${this.keep.url}`;
+      return `${this.keep.contentOfType}`;
     },
     keepImgUrl(){
         console.log(this.keep.url);
-        return `${this.keep.url}`; 
+        return `${this.keep.contentOfType}`; 
     },
     checkPrice() {
       return { low: this.keep.listPrice.amount < 20, high: this.keep.listPrice.amount > 150 };
