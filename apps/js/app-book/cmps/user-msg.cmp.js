@@ -1,4 +1,4 @@
-import { eventBus } from "../services/eventBus-service.js";
+import { eventBus } from "../../../services/eventBus-service.js"
 export default {
     template: `
  <section v-if="msg" class="user-msg" :class="msg.type">
