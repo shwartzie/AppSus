@@ -2,27 +2,28 @@ import { bookService } from "../services/book-service.js"
 import bookFilter from "../cmps/book-filter.cmp.js"
 import bookAdd from "../cmps/book-add.cmp.js"
 import bookList from "../cmps/book-list.cmp.js"
+
 import { eventBus } from "../../../services/eventBus-service.js"
 
 export default {
     template: `
         <section class="app-main">
-           <book-filter @filtered="setFilter" />
-           <book-add />
-           <router-link to="/book/edit"  class="glow-on-hover" role="button">Add new book</router-link>
-           <book-list :books="booksForDisplay" @remove="removebook"  />
+            <book-filter @filtered="setFilter" />
+            <book-add />
+            <router-link to="/book/edit"  class="glow-on-hover" role="button">Add new book</router-link>
+            <book-list :books="booksForDisplay" @remove="removebook"  />
         </section>
     `,
     components: {
         bookFilter,
         bookList,
-        bookAdd
+        bookAdd,
     },
     data() {
         return {
             books: null,
             filterBy: null,
-            searchBook:null,
+            searchBook: null,
         }
     },
     created() {

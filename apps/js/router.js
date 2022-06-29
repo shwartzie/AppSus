@@ -3,7 +3,7 @@ import homePage from "./app-book/views/home-page.cmp.js"
 import aboutPage from "./app-book/views/about-page.cmp.js"
 import bookDetails from "./app-book/views/book-details.cmp.js"
 import bookEdit from "./app-book/views/book-edit.cmp.js"
-
+import mailApp from './app-mail/views/mail-app.cmp.js'
 const routes = [
     {
         path: "/",
@@ -25,6 +25,10 @@ const routes = [
         path: "/book/edit/:bookId?",
         component: bookEdit,
     },
+    {
+        path: '/mail',
+        component: mailApp
+    }
 ]
 
 export const router = VueRouter.createRouter({
