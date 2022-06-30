@@ -1,7 +1,8 @@
 export default {
     props: ["keep"],
   template: `
-  <h1>{{renderList}}</h1>
+    <h1>{{keep.title}}</h1>
+  <h1>{{keep.contentOfType}}</h1>
   `,
   data() {
     return {};
