@@ -5,8 +5,15 @@ export default {
     template: `
      <aside class="aside">
         <div class="aside-funcs">
-            <mail-compose @submittedMsg="submittedMsg" @draftMsg="draftedMsg" :class="showCompose" v-if="isOpen" :isOpen="isOpen"/>
-            <a class="btn" @click="isOpen = !isOpen">Compose</a>
+            <mail-compose 
+            @submittedMsg="submittedMsg
+            " @draftMsg="draftedMsg"
+            :class="showCompose"
+            v-if="isOpen"
+            :isOpen="isOpen"
+            @open="setComposeModal"
+            />
+            <a class="btn-mail-aside compose-btn" @click="isOpen = !isOpen">Compose</a>
             <a class="btn-mail-aside" @click="noFilter">Inbox</a>
             <a class="btn-mail-aside" @click="filterByStarred">Starred</a>
             <a class="btn-mail-aside" @click="filterBySentMails" >Sent Mail</a>
@@ -23,30 +30,27 @@ export default {
     created() { },
     methods: {
         noFilter() {
-            this.$emit('inbox')
+            this.$emit('inbox', 'inbox')
         },
         filterByStarred() {
-            const starredMails = this.mails.filter(mail => mail.isStarred)
-            console.log(starredMails)
-            this.$emit('starred', starredMails)
+            this.$emit('starred', 'starred')
         },
         submittedMsg(mail) {
             this.mail = mail
             mailService.save(mail)
         },
         filterBySentMails() {
-            mailService.query().then(() => {
-                this.$emit('submittedMsg')
-            })
+            this.$emit('sentMsg', 'sentMsg')
         },
         draftedMsg(mail) {
             this.mail = mail
             mailService.save(mail)
         },
         filterByDrafts() {
-            mailService.query().then(() => {
-                this.$emit('draftedMsg')
-            })
+            this.$emit('draftedMsg', 'draftedMsg')
+        },
+        setComposeModal(isOpen) {
+            this.isOpen = isOpen
         }
     },
     computed: {

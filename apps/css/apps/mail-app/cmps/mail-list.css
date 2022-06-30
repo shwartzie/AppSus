@@ -4,8 +4,11 @@
 .mail-star {
     font-size: 1.5em;
     border: none;
+    cursor: pointer;
+    background-color: transparent;
 }
 
 .mail-ul {
     display: block;
+    padding: 0;
 }

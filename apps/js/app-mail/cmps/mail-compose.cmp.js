@@ -28,29 +28,32 @@ export default {
         };
     },
     created() {
-        console.log(this.open)
         this.open = this.isOpen
      },
     methods: {
         onClose() {
-            this.$emit('open', this.open)
             this.open = false
             const emptyMail = mailService.getEmptyMail()
             if(this.mail !== emptyMail) {
                 this.mail.isDrafted = true
                 this.saveToDraft(this.mail)
             }
+            this.$emit('open', this.open)
         },
         onSubmit() {
+            this.open = false
             setTimeout(() => {
-                this.open = false
-                this.mail.sentAt = Date.now()
-                this.$emit('submittedMsg', this.mail)
+                this.submittedMsg(this.mail)
             },500)
+            this.$emit('open', this.open)
         },
         saveToDraft(mail) {
             this.$emit('draftMsg', mail)
         },
+        submittedMsg(mail) {
+            mail.sentAt = Date.now()
+            this.$emit('submittedMsg', mail)
+        }
 
     },
     computed: {

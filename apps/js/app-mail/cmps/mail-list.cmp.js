@@ -3,26 +3,25 @@ import { mailService } from "../services/mail-service.js"
 export default {
     props: ["mails"],
     template: `
-    <section class="mail-list">
+        <section class="mail-list">
             <ul class="mail-ul">
                 <div  v-for="mail in mails" :key="mail.id">
-                    <li class="mails-preview-container" v-if="!mail.sentAt && !mail.isDrafted">
-                        <mail-preview :mail="mail" @click="selectedMail(mail)" />
+                    <li class="mails-preview-container">
                         <div class="actions">
+                            <input type="checkbox" v-model="isChecked" @click="setCheck(mail.id)"/>
                             <button class="mail-star" :class="onStarActive" @click="onStar(mail, activeStar = !activeStar)">✰</button>
-                            <button @click=""></button>
                         </div>
+                        <mail-preview :mail="mail" @click="selectedMail(mail)" />
                     </li>
                 </div>
-
             </ul>
         </section>
-   
 `,
     data() {
         return {
             activeStar: false,
-            starId: null
+            starId: null,
+            isChecked: false
         };
     },
     created() { },
@@ -41,7 +40,9 @@ export default {
                 mailService.save(mail)
             }
         },
-        
+        setCheck(mailId) {
+            console.log(mailId)
+        }
 
     },
     computed: {

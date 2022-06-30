@@ -1,7 +1,7 @@
 .aside {
     /* flex-direction: row-reverse; */
     max-width: 100px;
-    max-height: 165px;
+    max-height: 100%;
     width: 100%;
     height: 100%;
 }
@@ -10,13 +10,14 @@
 }
 .aside-funcs {
     flex-direction: column;
+    width: 100%;
     
 }
 .aside-funcs > a {
     color: #202124;
 }
 
-.compose {
+.compose-btn {
     border-radius: 10px;
     border: 1px black solid;
     padding: 1em;
@@ -29,7 +30,7 @@
     cursor: pointer;
 }
 .btn-mail-aside:hover, .btn-mail-aside:active {
-    border-radius: 6.25em 0px 0px 6.25em;
+    border-radius: 0em 6.25em 6.25em 0em;
     background-color: rgba(220, 86, 86, 0.593);
     color: #d93025;
 }

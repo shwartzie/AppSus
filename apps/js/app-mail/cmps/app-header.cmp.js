@@ -24,16 +24,14 @@ export default {
     `,
     data() {
         return {
-            filterBy: null,
         };
     },
     created() { 
        
     },
     methods: {
-        setFilter(filterBy) {
-            this.filterBy = filterBy;
-            this.$emit('filtered', this.filterBy)
+        setFilter(txt) {
+            this.$emit('filtered', txt)
         },
     },
     computed: {
