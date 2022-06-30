@@ -1,23 +1,22 @@
-import { keepService } from "../services/keep-service.js";
 
 export default {
     template: `
     <section class="keep-input">  
             <div class="inputs">
-
+            <!-- clear on click, when repressing the title its reset error -->
             <blockquote contenteditable="true" ref="titleInput" @input="changeTitle()" @click="openType('text')" >
                 <p class="new-keep-title">start a new keep</p>
             </blockquote>
-                    <form v-if="keepType" @submit.prevent="save">
-                    <cite contenteditable="true" v-if="keepType === 'img'"  ref="imgInput" @input="inputImgUrl(value)">image url:</cite>
+                    <div v-if="keep.type" >
+                    <p contenteditable="true" v-if="keep.type === 'img'"  ref="imgInput" @input="inputImgUrl(value)">image url:</p>
                         
-                    <cite contenteditable="true"  v-else-if="keepType === 'video'" ref="vidInput" @input="inputVidUrl(value)">video url:</cite>
+                    <p contenteditable="true"  v-else-if="keep.type === 'video'" ref="vidInput" @input="inputVidUrl(value)" >video url:</p>
 
                     
-                        <blockquote contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keepType === 'text'">
+                        <blockquote contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keep.type === 'text'">
                             <p class="free-text-input">text</p>
                         </blockquote>
-                        <blockquote  v-else-if="keepType === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
+                        <blockquote  v-else-if="keep.type === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
                              <p class="new-keep-title">start a Todo</p>
                          </blockquote>
 
@@ -27,8 +26,8 @@ export default {
                             <button @click="openType('video')">video</button>
                             <button @click="openType('todo')">todo list</button>
                         </div>
-                        <button >Add</button>
-                    </form>
+                        <button @click="save">Add</button>
+                    </div>
             </div>   
                     
     </section>
@@ -38,7 +37,7 @@ export default {
             keepType: null,
             keep: {
                 title: '',
-                type: 'text',
+                type: '',
                 contentOfType: '',
 
             }
@@ -47,35 +46,37 @@ export default {
     created() { },
     methods: {
         openType(type) {
-            this.keepType = type
-            console.log(this.keepType);
+            this.keep.type = type
         },
         save() {
-            console.log(this.keep);
-            keepService.save(this.keep)
 
+            this.$emit("add", this.keep)
+            this.keep={
+                title: '',
+                type: '',
+                contentOfType: '',
+                isPinned:false,
+
+            }
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
 
         },
         inputFreeText() {
-            this.keep.typeOfKeep = 'text'
+            this.keep.type = 'text'
             this.keep.contentOfType = this.$refs.freeTxtInput.innerText
         },
-        inputImgUrl(value) {
-            this.keep.typeOfKeep = 'img'
-            console.log(this.$refs.imgInput.innerText);
+        inputImgUrl() {
             this.keep.contentOfType = this.$refs.imgInput.innerText
         },
-        inputVidUrl(value) {
-            this.keep.typeOfKeep = 'video'
+        inputVidUrl() {
             this.keep.contentOfType = this.$refs.vidInput.innerText
         },
         inputTodoList() {
-            this.keep.typeOfKeep = 'todo'
             this.keep.contentOfType = this.$refs.todoInput.innerText
         },
+        //do better
     },
     computed: {},
     mounted() { },

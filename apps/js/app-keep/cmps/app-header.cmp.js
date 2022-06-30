@@ -5,7 +5,7 @@ export default {
                 <h3>keep</h3>
             </div>
             <h1>logo</h1>
-            <input type="text" placeholder="search">
+            <input placeholder="title" type="text" v-model="filterBy.txt" @input="filter" ref="textInput">
             <nav class="nav-bar">
 
                 <router-link to="/">Home</router-link>|
@@ -18,4 +18,19 @@ export default {
         </header>
     
     `,
+       data() {
+        return {
+            filterBy: {
+                txt: "",
+            },
+        }
+    },
+    mounted() {
+        this.$refs.textInput.focus()
+    },
+    methods: {
+        filter() {
+            this.$emit("filtered", { ...this.filterBy })
+        },
+    },
 }
