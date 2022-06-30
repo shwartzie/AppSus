@@ -5,4 +5,29 @@
 }
 .mail {
     width: 90%;
+    display: flex;
+    align-items: center;
+    align-content: center
+}
+
+.mail-to {
+    width: 15%;
+}
+.mail-body {
+    padding-left: 3rem;
+}
+
+.mail-content-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mail-content {
+    width: 1500px;
+    display: flex;
+}
+
+.mail-subject {
+    max-width: 200px;
+    width: 100%;
 }
