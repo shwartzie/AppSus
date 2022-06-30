@@ -8,7 +8,8 @@
 @import './mail-app/cmps/mail-conent.css';
 @import './mail-app/cmps/mail-preview.css';
 @import './mail-app/cmps/mail-list.css';
-
+@import './mail-app/cmps/mail-compose.css';
+@import '../typography.css';
 body {
   height: 100vh;
   color: #202124;
@@ -123,3 +124,4 @@ div .book {
   padding: 0;
   margin: 0;
 }
+

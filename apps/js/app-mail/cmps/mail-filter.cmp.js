@@ -7,7 +7,6 @@ export default {
         return {
             filterBy: {
                 subject: '',
-                starred: false
             }
         }
     },

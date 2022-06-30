@@ -1,5 +1,5 @@
 .aside {
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
     max-width: 100px;
     max-height: 165px;
     width: 100%;

@@ -41,7 +41,8 @@ function getEmptyMail() {
     body: '',
     isRead: false,
     sentAt: null,
-    to: ''
+    to: '',
+    isDrafted: false
   }
 }
 
@@ -51,7 +52,7 @@ function _createMail
     subject = utilService.makeLorem(2),
     body = utilService.makeLorem(utilService.getRandomInt(15, 20)),
     isRead = false,
-    sentAt = Date.now(),
+    sentAt = null,
     to = 'momo@momo.com',
     isStarred = false
   ) {

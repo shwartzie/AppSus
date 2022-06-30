@@ -5,8 +5,8 @@ export default {
     template: `
     <section class="mail-list">
             <ul class="mail-ul">
-                <div  v-for="mail in mails" :key="mail.id">
-                    <li class="mails-preview-container" v-if="!mail.sentAt && !mail.isDrafted">
+                <div v-for="mail in mails" :key="mail.id">
+                    <li class="mails-preview-container" v-if="mail.sentAt">
                         <mail-preview :mail="mail" @click="selectedMail(mail)" />
                         <div class="actions">
                             <button class="mail-star" :class="onStarActive" @click="onStar(mail, activeStar = !activeStar)">✰</button>
@@ -14,10 +14,8 @@ export default {
                         </div>
                     </li>
                 </div>
-
             </ul>
         </section>
-   
 `,
     data() {
         return {
