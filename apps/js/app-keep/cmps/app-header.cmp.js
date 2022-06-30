@@ -5,6 +5,7 @@ export default {
                 <h3>keep</h3>
             </div>
             <h1>logo</h1>
+            <button @click="setToCol"></button>
             <input placeholder="title" type="text" v-model="filterBy.txt" @input="filter" ref="textInput">
             <nav class="nav-bar">
 
@@ -32,5 +33,8 @@ export default {
         filter() {
             this.$emit("filtered", { ...this.filterBy })
         },
+        setToCol(){
+            this.$emit("col", 'flex-column-wrap')
+        }
     },
 }

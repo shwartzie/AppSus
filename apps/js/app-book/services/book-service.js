@@ -437,7 +437,3 @@ function _createBooks() {
   }
   return books;
 }
-
-
-
-

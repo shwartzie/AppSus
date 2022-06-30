@@ -10,8 +10,8 @@
 }
 .keep-preview-container{
     margin: 10px;
-    max-height: 300px;
     text-align: center;
+    height: fit-content;
 
 }
 .keep-list{
@@ -53,8 +53,19 @@ blockquote{
     max-width: 0;
 
 }
+.keep{
+    background-color: antiquewhite;
+}
 blockquote,cite{
     overflow: hidden;
     max-width: 100%;
     max-height: 100%;
+}
+.done {
+    text-decoration: line-through;
+}
+.flex-column-wrap{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }

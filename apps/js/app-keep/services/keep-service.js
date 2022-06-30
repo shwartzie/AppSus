@@ -12,7 +12,9 @@ export const keepService = {
   get,
   saveChangedKeep,
   randomBC,
-  saveStarred
+  saveStarred,
+  saveAllKeep,
+  createTodo
 };
 
 function query() {
@@ -27,6 +29,9 @@ function remove(keepId) {
 
 function get(keepId) {
   return storageService.get(KEEP_KEY, keepId);
+}
+function saveAllKeep(keeps){
+  return storageService.postMany(KEEP_KEY, keeps);
 }
 
 function save(keep) {
@@ -66,7 +71,8 @@ function _createKeeps() {
         type:'text',
         id:101,
         bgColor:randomBC(),
-        isPinned:false
+        isPinned:false,
+        
       },
       {
         title:'ooga booga',
@@ -98,9 +104,10 @@ function _createKeeps() {
   }
   return keeps;
 }
-function _createTodo(txt) {
+function createTodo(txt) {
   
   const todo = {
+      id:_makeId(),
       txt,
       isDone: false,
   }
@@ -112,7 +119,7 @@ function _createTodos() {
   var todos 
       const txts = ['Learn HTML', 'Study CSS', 'Master JS']
       // todos = txts.map(txt => _createTodo(txt))
-      todos = txts.map(_createTodo)
+      todos = txts.map(createTodo)
       return todos
 }
 
@@ -122,3 +129,11 @@ function randomBC(){
 }
 
 
+function _makeId(length = 5) {
+  var txt = ''
+  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+  for (var i = 0; i < length; i++) {
+      txt += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return txt
+}

@@ -17,7 +17,7 @@ export default {
                             <p class="free-text-input">text</p>
                         </blockquote>
                         <blockquote  v-else-if="keep.type === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
-                             <p class="new-keep-title">start a Todo</p>
+                             <p class="new-keep-title">enter a coma seperated list</p>
                          </blockquote>
 
                         <div class="keep-buttons" contenteditable="false">
@@ -61,7 +61,6 @@ export default {
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
-
         },
         inputFreeText() {
             this.keep.type = 'text'
@@ -75,6 +74,7 @@ export default {
         },
         inputTodoList() {
             this.keep.contentOfType = this.$refs.todoInput.innerText
+            
         },
         //do better
     },

@@ -23,7 +23,7 @@ export default {
         <iframe width="220" height="115" :src="keepVidUrl" frameborder="0" gesture="media" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
         </div>
         <div v-else-if="keep.type === 'todo'">
-        <todo-keep :keep="keep"/>
+        <todo-keep :keep="keep" @update="updateKeep" />
         </div>
     </div>
 `,
@@ -48,6 +48,9 @@ export default {
             keepService.saveChangedKeep(keep)
         }, 500)
     },
+    updateKeep(keep){
+      keepService.saveChangedKeep(keep)
+    }
   },
   computed: {
     keepVidUrl() {
