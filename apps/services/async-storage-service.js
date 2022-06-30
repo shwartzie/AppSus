@@ -44,8 +44,6 @@ function put(entityType, updatedEntity) {
   return query(entityType).then((entities) => {
     const idx = entities.findIndex((entity) => entity.id === updatedEntity.id);
     entities.splice(idx, 1, updatedEntity);
-    console.log(updatedEntity);
-
     _save(entityType, entities);
     return updatedEntity;
   });

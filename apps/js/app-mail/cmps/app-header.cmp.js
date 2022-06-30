@@ -5,18 +5,24 @@ export default {
             <nav class="nav-bar">
                 <div class="logo-and-hamburger">
                     <a class="hamburger" @click="openMenu">
-                        <i class="fa fa-bars"></i>
+                        ☰
                     </a>
-                    <img src="../img/gmail-logo.png" alt="">
-                    <h3>Mail</h3>
+                    <div class="logo-and-mail">
+                        <img src="../img/logo_gmail_lockup_default_1x_rtl_r2.png" alt="">
+                    </div>
+                </div>
+                <div class="mail-filter-container">
                     <mail-filter @filtered="setFilter" />
                 </div>
-                <div class="apps-nav">
-                    <router-link to="/">Home</router-link>|
-                    <router-link to="/book">books</router-link>|
-                    <router-link to="/about">About</router-link>|
-                    <router-link to="/mail">Mail</router-link>|
-                    <router-link to="/keep">Keep</router-link>|
+                <div class="apps-nav" @click="isOpen = !isOpen">
+                <i class="fa-solid fa-list-ul"></i>
+                    <div v-if="isOpen" :class="showExpansionModal">
+                        <router-link to="/"><i class="fa-solid fa-house"></i></router-link>
+                        <router-link to="/book"><i class="fa-solid fa-books"></i></router-link>
+                        <router-link to="/about"><i class="fa-solid fa-address-card"></i></router-link>
+                        <router-link to="/mail"><i class="fa-solid fa-envelopes-bulk"></i></router-link>
+                        <router-link to="/keep"><i class="fa-solid fa-folder"></i></router-link>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -24,6 +30,7 @@ export default {
     `,
     data() {
         return {
+            isOpen: false
         };
     },
     created() { 
@@ -35,7 +42,9 @@ export default {
         },
     },
     computed: {
-        
+        showExpansionModal() {
+            return this.isOpen ? 'apps-nav-modal' : ''
+        }
     },
     unmounted() { },
     components: {

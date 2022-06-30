@@ -1,5 +1,5 @@
 import { mailService } from "../services/mail-service.js";
-import mailCompose from "./mail-compose.cmp.js";
+import mailCompose from "../cmps/mail-compose.cmp.js"
 export default {
     props: ['mails'],
     template: `
@@ -18,6 +18,7 @@ export default {
             <a class="btn-mail-aside" @click="filterByStarred">Starred</a>
             <a class="btn-mail-aside" @click="filterBySentMails" >Sent Mail</a>
             <a class="btn-mail-aside" @click="filterByDrafts">Drafts</a>
+            <a class="btn-mail-aside" @click="filterByArchive">Archive</a>
         </div>
      </aside>
     `,
@@ -51,6 +52,9 @@ export default {
         },
         setComposeModal(isOpen) {
             this.isOpen = isOpen
+        },
+        filterByArchive() {
+            this.$emit('archived', 'archived')
         }
     },
     computed: {

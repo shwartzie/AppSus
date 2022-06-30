@@ -6,9 +6,16 @@
     border: none;
     cursor: pointer;
     background-color: transparent;
+    opacity: 0.2;
 }
 
 .mail-ul {
     display: block;
     padding: 0;
+    width:100%;
+}
+
+.mail-check-box {
+    cursor: pointer;
+    opacity: 0.2;
 }

@@ -1,33 +1,70 @@
 .mails-preview-container {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    /* gap: 1rem; */
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
+    padding: 0.3em 0 0.3em 0em;
+    position: relative;
 }
 .mail {
     width: 90%;
     display: flex;
     align-items: center;
-    align-content: center
+    align-content: center;
 }
 
+.mail-list {
+    display: flex;
+    margin-left: 2rem;
+    width: 100%;
+    justify-content: space-between;
+}
 .mail-to {
     width: 15%;
 }
 .mail-body {
     padding-left: 3rem;
+    opacity: 0.6;
 }
 
-.mail-content-container{
+.mail-content-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+
+}
+.mail-container {
+    display: flex;
 }
 
-.mail-content {
+.mail-container:hover {
+    cursor: pointer;
+    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+        0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    z-index: 2;
+}
+
+/* .mail-content {
     width: 1500px;
     display: flex;
-}
+} */
 
 .mail-subject {
     max-width: 200px;
     width: 100%;
+}
+
+.mail-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.extra-mail-actions {
+    display:flex;
+}
+.extra-mail-actions button {
+    background-color: transparent;
+    flex-direction: row;
+    border: none;
+    cursor: pointer;
 }
