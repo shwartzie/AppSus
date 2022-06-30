@@ -11,6 +11,8 @@ export const keepService = {
   getEmptyKeep,
   get,
   saveChangedKeep,
+  randomBC,
+  saveStarred
 };
 
 function query() {
@@ -30,6 +32,9 @@ function get(keepId) {
 function save(keep) {
   if (keep.id) return storageService.put(KEEP_KEY, keep);
   else return storageService.post(KEEP_KEY, keep);
+}
+function saveStarred(keep){
+  return storageService.postStarred(KEEP_KEY, keep);
 }
 function saveChangedKeep(keep){
   return storageService.put(KEEP_KEY, keep)
@@ -59,27 +64,33 @@ function _createKeeps() {
         title:'ooga booga',
         contentOfType:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'text',
-        id:101
+        id:101,
+        bgColor:randomBC(),
+        isPinned:false
       },
       {
         title:'ooga booga',
-        freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'video',
         contentOfType:'https://www.youtube.com/embed/tgbNymZ7vqY',
-        id:102
+        id:102,
+        bgColor:randomBC(),
+        isPinned:false
       },
       {
         title:'ooga booga',
-        freeText:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
         type:'img',
         contentOfType:'https://i.pinimg.com/474x/b6/0f/20/b60f20b811cbe9a73bfbc2658ff53b74.jpg',
-        id:103
+        id:103,
+        bgColor:randomBC(),
+        isPinned:false
       },
       {
-        title:'ooga booga',
-        contentOfType:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, molestias?',
-        type:'todo-list',
-        id:104
+        title:'on god',
+        contentOfType:_createTodos(),
+        type:'todo',
+        id:104,
+        bgColor:randomBC(),
+        isPinned:false
       },
     ]
 
@@ -87,7 +98,27 @@ function _createKeeps() {
   }
   return keeps;
 }
+function _createTodo(txt) {
+  
+  const todo = {
+      txt,
+      isDone: false,
+  }
+  console.log(todo);
+  return todo
+}
 
+function _createTodos() {
+  var todos 
+      const txts = ['Learn HTML', 'Study CSS', 'Master JS']
+      // todos = txts.map(txt => _createTodo(txt))
+      todos = txts.map(_createTodo)
+      return todos
+}
 
+function randomBC(){
+  return Math.floor(Math.random()*16777215).toString(16);
+
+}
 
 
