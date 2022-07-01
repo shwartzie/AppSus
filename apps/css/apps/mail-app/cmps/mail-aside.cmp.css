@@ -20,6 +20,7 @@
 
 .mail-compose {
     border-radius: 1.5em;
+    margin-bottom: 1.2rem;
     width: 125px;
     padding-right: 1.5em;
     font-size: .875rem;
@@ -32,6 +33,7 @@
     border: none;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
     transition:  background-color 0.5s ease;
+    
 }
 
 .mail-compose:hover {

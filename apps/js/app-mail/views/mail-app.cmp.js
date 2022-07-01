@@ -19,7 +19,7 @@ export default {
             @draftedMsg="setType" 
             @archived="setType"
         />
-        <mail-list v-if="mails" :mails="mailsForDisplay" @selected="onSelectedMail" @removed="removeMail" />
+        <mail-list v-if="mails" :mails="mailsForDisplay" :selectedList="filterByType" @selected="onSelectedMail" @removed="removeMail" />
         <mail-compose v-if="selectedMail" :selectedMail="selectedMail"/>
     </section>
     `,
@@ -91,7 +91,7 @@ export default {
 
             } else if(this.filterByType === 'archived') {
                 return this.mails.filter(mail => mail.isArchived)
-            } 
+            }
             if (!this.filterBy) {
                 return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted && !mail.isArchived)
             }
@@ -99,7 +99,7 @@ export default {
             const txt = this.filterBy
             const regex = new RegExp(txt, "i")
             return this.mails.filter((mail) => regex.test(mail.subject) || regex.test(mail.body))
-        }
+        },
     },
     unmounted() { },
     components: {

@@ -1,7 +1,4 @@
-.star-active,.mail-star:hover {
-    color: rgb(233, 233, 84);
-    opacity: 1;
-}
+
 .mail-star {
     font-size: 1.2em;
     border: none;
@@ -9,7 +6,10 @@
     background-color: transparent;
     opacity: 0.2;
 }
-
+.star-active,.mail-star:hover {
+    color: rgb(233, 233, 84);
+    opacity: 1;
+}
 .mail-ul {
     display: block;
     padding: 0;

@@ -13,10 +13,10 @@ export default {
             :isOpen="isOpen"
             @open="setComposeModal"
             />
-            <div class="mail-compose">
+            <div class="mail-compose" @click="isOpen = !isOpen">
                 <div class="compose-logo">
                 </div>
-                <a class="compose-btn" @click="isOpen = !isOpen">Compose</a>
+                <a class="compose-btn" >Compose</a>
             </div>
             <div class="mail-aside-btns btn-mail-aside" :class="showSelectedList('inbox')" @click="noFilter">
                 <div class="aside-icon">
@@ -104,7 +104,6 @@ export default {
             this.$emit('readMail', 'readMail')
         },
         showSelectedList(type) {
-            console.log(type)
             return this.selectedList === type ? `list-selected-${type}` : ''
         }
     },

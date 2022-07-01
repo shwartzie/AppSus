@@ -55,6 +55,9 @@ export default {
         submittedMsg(mail) {
             mail.sentAt = Date.now()
             this.$emit('submittedMsg', mail)
+        },
+        onDeleteMessage() {
+            this.open = false
         }
 
     },

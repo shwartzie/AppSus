@@ -18,7 +18,7 @@ export default {
                 <i class="fa-solid fa-list-ul"></i>
                     <div v-if="isOpen" :class="showExpansionModal">
                         <router-link to="/"><i class="fa-solid fa-house"></i></router-link>
-                        <router-link to="/book"><i class="fa-solid fa-books"></i></router-link>
+                        <router-link to="/book"><i class="fa-solid fa-book"></i></router-link>
                         <router-link to="/about"><i class="fa-solid fa-address-card"></i></router-link>
                         <router-link to="/mail"><i class="fa-solid fa-envelopes-bulk"></i></router-link>
                         <router-link to="/keep"><i class="fa-solid fa-folder"></i></router-link>

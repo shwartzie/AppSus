@@ -1,9 +1,10 @@
 import mailPreview from "../cmps/mail-preview.cmp.js"
 import { mailService } from "../services/mail-service.js"
 export default {
-    props: ["mails"],
+    props: ["mails", "selectedList"],
     template: `
         <section class="mail-list">
+            <div>{{checkEmails(selectedList)}}</div>
             <ul class="mail-ul">
                 <div  v-for="mail in mails" :key="mail.id">
                     <li class="mails-preview-container" @mouseover="mouseOver">
@@ -30,12 +31,15 @@ export default {
         return {
             starId: null,
             isHover: false,
+            list: null
         };
     },
-    created() { },
+    created() {
+      
+    },
     methods: {
         onSelectedMail(mail) {
-            this.$emit('selected', {...mail})
+            this.$emit('selected', { ...mail })
         },
         onStar(mail) {
             mail.isStarred = !mail.isStarred
@@ -63,8 +67,21 @@ export default {
             return mail.isStarred ? 'star-active' : ''
         },
         showEnvelope(mail) {
-            return mail.isRead ?  'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
+            return mail.isRead ? 'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
         },
+        checkEmails(list) {
+            if (list === 'inbox') {
+                return 'Sorry There is no mails in this mailbox'
+            } else if (list === 'starred') {
+                return 'Sorry, No starred emails were found. In order to have starred emails please mark them in the Inbox'
+            } else if (list === 'draftedMsg') {
+                return 'Sorry, No drafted emails were found. In order to have drafted emails you will have to have unfinishied Composer'
+            } else if (list === 'sentMsg') {
+                return 'Sorry, No emails were sent. You will see them as here as soon as they will be sent!'
+            } else if (list === 'archived') {
+                return 'Sorry, No emails were archived. In order to have archived emails please mark them in the Inbox'
+            }
+        }
 
     },
     computed: {

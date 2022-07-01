@@ -36,8 +36,9 @@ body {
     background-color: lightcyan;
 }
 .router-link-exact-active {
-    color: yellow;
+    color: rgba(227, 227, 85, 0.888);
 }
+
 
 .user-msg {
     position: absolute;
