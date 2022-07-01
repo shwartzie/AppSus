@@ -15,13 +15,13 @@ export default {
       </section>
 
     </section>
-    <app-footer /> 
+    <!-- <app-footer />  -->
 `,
   data() {
     return {
       keeps: null,
       filterBy: null,
-      direction:'keep-preview-container',
+      direction:'',
     };
   },
   components: {

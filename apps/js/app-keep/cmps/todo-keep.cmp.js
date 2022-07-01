@@ -2,7 +2,7 @@ export default {
     props: ["keep"],
   template: `
     <h1>{{keep.title}}</h1>
-  <li   v-for="content in keep.contentOfType">
+  <li   v-for="content in keep.contentOfType" class="todo-in-keep">
     <h1 :class="marked(content)" @click=toggleFinish(content)>{{content.txt}}</h1>
     <button @click=removeTodo(content.id)>X</button>
   </li>

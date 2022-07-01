@@ -5,12 +5,11 @@ export default {
     template: `
         <section class="keep-list">
             <!-- <ul> -->
-                <li v-for="keep in keeps" :key="keep.id" class="keep-preview-container" :style="readStyle(keep)" >
-                <keep-preview :keep="keep" />
-                <button @click="removeKeep(keep.id)"> X</button>
-                <button @click="dupKeep(keep)"> dup it</button>
-                <button @click="pinnedKeep(keep.id)" v-if="!keep.isPinned"> 📌</button>
-                <button @click="pinnedKeep(keep.id)" v-else> ⭐</button>
+                <li v-for="keep in keeps" :key="keep.id" 
+                class="keep-preview-container" :style="readStyle(keep)" 
+                >
+                <keep-preview :keep="keep" @remove="removekeep" @pinned="pinnedKeep" @dup="dupKeep"/>
+               
                 
                    <!-- <div class="actions">
                        <router-link :to="'/keep/'+keep.id">Details</router-link>
@@ -22,6 +21,11 @@ export default {
             <!-- </ul> -->
         </section>
     `,
+     data() {
+        return {
+            upHere: false,
+        };
+    },
     components: {
         keepPreview,
     },
@@ -43,6 +47,9 @@ export default {
         readStyle(keep) {
             return `background-color: #${keep.bgColor}`
         },
+        mouseOver(){
+            this.upHere = !this.upHere;   
+        }
     },
     computed: {
     },
