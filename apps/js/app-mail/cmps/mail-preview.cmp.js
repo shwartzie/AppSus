@@ -31,7 +31,7 @@ export default {
     methods: {
         selectedMail(mail, selected) {
             this.selected = selected
-            this.$emit('selected', {...mail});
+            this.$emit('selected', {...mail})
         },
     },
     computed: {},

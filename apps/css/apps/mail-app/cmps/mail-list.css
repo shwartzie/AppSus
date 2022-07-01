@@ -1,8 +1,9 @@
 .star-active,.mail-star:hover {
-    color: yellow;
+    color: rgb(233, 233, 84);
+    opacity: 1;
 }
 .mail-star {
-    font-size: 1.5em;
+    font-size: 1.2em;
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -13,9 +14,27 @@
     display: block;
     padding: 0;
     width:100%;
+    height: 625px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .mail-check-box {
     cursor: pointer;
     opacity: 0.2;
+    transition: opacity 0.3s ease;
+}
+.mail-check-box:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.mail-list {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 220px);
+}
+
+.aside-collapsed-wrapper .mail-list{
+    width: calc(100% - 45px);
 }

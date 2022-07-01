@@ -9,13 +9,16 @@ export default {
                     <li class="mails-preview-container" @mouseover="mouseOver">
                         <div class="mail-container">
                             <div class="mail-actions">
-                                <input class="mail-check-box" type="checkbox" v-model="isChecked" @click="setCheck(mail, isChecked = !isChecked)"/>
-                                <button class="mail-star" :class="onStarActive" @click="onStar(mail, activeStar = !activeStar)">✰</button> 
+                                <input class="mail-check-box" type="checkbox" v-model="isChecked" @click="setCheck(mail)"/>
+                                <button class="mail-star" :class="getActiveStarClass(mail)" @click="onStar(mail)">
+                                    <i class="fa-solid fa-star"></i>
+                                </button> 
                             </div>
                             <mail-preview :mail="mail" @selected="onSelectedMail"/>
                             <div class="extra-mail-actions">
-                                <button @click="onDelete(mail)">Delete</button>
-                                <button @click="onArchive(mail)">Archive</button>
+                                <button @click="onDelete(mail)"><i class="fa-solid fa-trash-can"></i></button>
+                                <button @click="onArchive(mail)"><i class="fa-solid fa-box-archive"></i></button>
+                                <button @click="onRead(mail)" :class="showEnvelope(mail)"></button>
                             </div>
                         </div>
                     </li>
@@ -25,26 +28,22 @@ export default {
 `,
     data() {
         return {
-            activeStar: false,
             starId: null,
-            isChecked: false,
-            isHover: false
+            isHover: false,
         };
     },
     created() { },
     methods: {
         onSelectedMail(mail) {
-            this.$emit('selected', mail)
+            this.$emit('selected', {...mail})
         },
-        onStar(mail, activeStar) {
-            this.starId = mail.id
-            this.activeStar = activeStar
-            mail.isStarred = activeStar
+        onStar(mail) {
+            mail.isStarred = !mail.isStarred
             mailService.save(mail)
-            
         },
-        setCheck(mail, isChecked) {
-            // console.log(mail)
+        setCheck(mail) {
+            mail.isChecked = !mail.isChecked
+            mailService.save(mail)
         },
         mouseOver() {
             this.isHover = !this.isHover
@@ -53,17 +52,24 @@ export default {
             this.$emit('removed', mail.id)
         },
         onArchive(mail) {
-            mail.isArchived = true
+            mail.isArchived = !mail.isArchived
             mailService.save(mail)
-        }
+        },
+        onRead(mail) {
+            mail.isRead = !mail.isRead
+            mailService.save(mail)
+        },
+        getActiveStarClass(mail) {
+            return mail.isStarred ? 'star-active' : ''
+        },
+        showEnvelope(mail) {
+            return mail.isRead ?  'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
+        },
 
     },
     computed: {
-        onStarActive() {
-            return this.activeStar ? 'star-active' : ''
-        }
+        
     },
-    unmounted() { },
     components: {
         mailPreview,
     },

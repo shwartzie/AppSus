@@ -29,14 +29,14 @@
     background-color: #ffffff;
     border: 1px solid rgba(22, 76, 167, 0.6);
   } */
-  input {
+  /* input {
     background: 0;
     outline: none;
     max-width: 400px;
     font-size: 1.5em;
     border: 2px solid rgb(68, 68, 68);
     border-collapse: collapse;
-  }
+  } */
   .book-review {
     margin: auto;
     width: 30vw;
