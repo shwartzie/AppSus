@@ -8,7 +8,7 @@ export default {
                 <li v-for="keep in keeps" :key="keep.id" 
                 class="keep-preview-container" :style="readStyle(keep)" 
                 >
-                <keep-preview :keep="keep" @remove="removekeep" @pinned="pinnedKeep" @dup="dupKeep"/>
+                <keep-preview :keep="keep" @remove="removeKeep" @pinned="pinnedKeep" @dup="dupKeep"/>
                
                 
                    <!-- <div class="actions">

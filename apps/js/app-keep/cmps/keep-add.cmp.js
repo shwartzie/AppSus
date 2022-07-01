@@ -8,31 +8,32 @@ export default {
                 start a new keep
             </p>
                     <div v-if="keep.type" >
-                        <p class="keep-input" contenteditable="true" v-if="keep.type === 'img'"  ref="imgInput" @input="inputImgUrl(value)">
-                            image url:
-                        </p>
-                        
-                        <p class="keep-input" contenteditable="true"  v-else-if="keep.type === 'video'" ref="vidInput" @input="inputVidUrl(value)" >
-                            video url:
-                        </p>
-
+                    <p class="keep-input" contenteditable="true" v-if="keep.type === 'img'"  ref="imgInput" @input="inputImgUrl(value)">
+                         image url:
+                    </p>
                     
-                        <p class="free-text-input keep-input" contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keep.type === 'text'">
-                          text
-                        </p>
-
-                        <p  class="new-keep-title" v-else-if="keep.type === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
-                            enter a coma seperated list
-                        </p>
-
-                        <div class="keep-buttons" >
-                            <button @click="openType('text')">text</button>
-                            <button @click="openType('img')">img</button>
-                            <button @click="openType('video')">video</button>
-                            <button @click="openType('todo')">todo list</button>
+                    <p class="keep-input" contenteditable="true"  v-else-if="keep.type === 'video'" ref="vidInput" @input="inputVidUrl(value)" >
+                        video url:
+                    </p>
+                
+                    <p class="free-text-input keep-input" contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keep.type === 'text'">
+                      text
+                    </p>
+                    <p  class="new-keep-title keep-input" v-else-if="keep.type === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
+                        enter a coma seperated list
+                    </p>
+                    <div class="keep-add-actions">
+                        <div >
+                            <button @click="openType('text')" class="keep-btn"><i class="fa-solid fa-keyboard"></i> </button>
+                            <button @click="openType('img')" class="keep-btn"><i class="fa-solid fa-image"></i></button>
+                            <button @click="openType('video')" class="keep-btn"><i class="fa-solid fa-video"></i></button>
+                            <button @click="openType('todo')" class="keep-btn"><i class="fa-solid fa-list-check"></i></button>
                         </div>
-                        <button @click="save">Add</button>
+                        <button class="keep-btn" @click="save">Add</button>
                     </div>
+                    </div>
+                    <button class="keep-btn empty-thumbtack"><i class="fa-solid fa-thumbtack"></i></button>
+
             </div>   
                     
     </section>
@@ -54,7 +55,7 @@ export default {
             this.keep.type = type
         },
         save() {
-
+            if (this.keep.type) {
             this.$emit("add", this.keep)
             this.keep={
                 title: '',
@@ -62,7 +63,7 @@ export default {
                 contentOfType: '',
                 isPinned:false,
 
-            }
+            }}
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText

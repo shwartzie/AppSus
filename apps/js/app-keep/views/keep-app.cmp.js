@@ -11,7 +11,7 @@ export default {
       <section class="main-content">
         <keep-add @add="addkeep"/>
         
-        <keep-list :keeps="keepsForDisplay" :class="setDisplay" @remove="removekeep" @pinned="pinnedKeep" @dup="dupKeep"/>
+        <keep-list :keeps="keepsForDisplay" :class="setDisplay" @remove="removeKeep" @pinned="pinnedKeep" @dup="dupKeep"/>
       </section>
 
     </section>
@@ -38,7 +38,7 @@ export default {
     });
   },
   methods: {
-    removekeep(id) {
+    removeKeep(id) {
       keepService
         .remove(id)
         .then(() => {

@@ -6,9 +6,13 @@ let keepTimer;
 export default {
   props: ["keep"],
   template: `
-  <div class="keep-container" :style="readStyle(keep)" @mouseover="upHere = true" @mouseleave="upHere = false">
+  <div class="keep-container" :style="readStyle(keep)" @mouseover="mouseHover('show')" @mouseleave="mouseHover('hidden')">
+    <div class="pinned">
+      <button @click="pinnedKeep(keep.id)":class="mouseHoverShow" class="pin-keep keep-btn" v-if="!keep.isPinned"> <i class="fa-solid fa-thumbtack"></i></button>
+      <button @click="pinnedKeep(keep.id)" class="pin-keep keep-btn" v-else> ⭐</button>
 
-    <cite contenteditable="true" ref="titleInput" @input="changeTitle(keep)">{{keep.title}}</cite>
+    </div>
+
     <div  class="keep" >
       <img v-if="keep.type === 'img'" :src="keepImgUrl" class="keep-img" alt="">
       
@@ -20,20 +24,20 @@ export default {
       <iframe v-else-if="keep.type === 'video'" width="220" height="115" :src="keepVidUrl" frameborder="0" gesture="media" allow="autoplay; encrypted-media" allowfullscreen> </iframe>
       
       <todo-keep v-else-if="keep.type === 'todo'" :keep="keep" @update="updateKeep" />
+      <cite contenteditable="true" ref="titleInput" @input="changeTitle(keep)">{{keep.title}}</cite>
     </div>
-    <div class="keep-actions" v-show="upHere">
+    <div class="keep-actions " :class="mouseHoverShow">
 
-        <button @click="removeKeep(keep.id)"> X</button>
-        <button @click="dupKeep(keep)"> dup it</button>
-        <button @click="pinnedKeep(keep.id)" v-if="!keep.isPinned"> 📌</button>
-        <button @click="pinnedKeep(keep.id)" v-else> ⭐</button>
+        <button @click="removeKeep(keep.id)" class="keep-btn"> <i class="fa-solid fa-trash-can"></i></button>
+        <button @click="dupKeep(keep)" class="keep-btn"><i class="fa-solid fa-clone"></i></button>
     </div>
   </div>
 `,
 
   data() {
     return {
-      upHere: false,
+      showState: 'hidden',
+
     };
   },
   methods: {
@@ -57,8 +61,8 @@ export default {
     readStyle(keep) {
       return `background-color: #${keep.bgColor}`;
     },
-    mouseOver: function () {
-      this.upHere = !this.upHere;
+    mouseHover(value) {
+      this.showState = value;
     },
     removeKeep(keepId) {
       this.$emit("remove", keepId);
@@ -84,6 +88,9 @@ export default {
     checkPrice() {
       return { low: this.keep.listPrice.amount < 20, high: this.keep.listPrice.amount > 150 };
     },
+    mouseHoverShow(){
+      return this.showState
+    }
   },
   components: {
     longText,

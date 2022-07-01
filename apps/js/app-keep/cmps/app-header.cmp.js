@@ -1,5 +1,5 @@
 export default {
-    template: `
+  template: `
         <header class="mail-header-keep">
             <nav class="nav-bar">
                 <div class="keep-logo-and-hamburger">
@@ -12,7 +12,7 @@ export default {
                     <h1>Keep</h1>
                 </div>
                 <div class="keep-filter-container">
-                <button @click="setToCol"></button>
+                <button class="keep-btn" @click="setToCol"> <img src="../../../img/icons8-rows-50.png" alt=""></button>
                 <input placeholder="title" type="text" v-model="filterBy.txt" @input="filter" ref="textInput">
                 </div>
                 <div class="apps-nav" @click="isOpen = !isOpen">
@@ -29,37 +29,35 @@ export default {
         </header>
     
     `,
-    data() {
-        return {
-            isOpen: false,
-            filterBy: {
-                        txt: "",
-                    },
-        };
+  data() {
+    return {
+      isOpen: false,
+      filterBy: {
+        txt: "",
+      },
+    };
+  },
+  mounted() {
+    this.$refs.textInput.focus();
+  },
+  created() {},
+  methods: {
+    filter() {
+      this.$emit("filtered", { ...this.filterBy });
     },
-    mounted() {
-                this.$refs.textInput.focus()
-            },
-    created() { 
-       
+    setToCol() {
+      this.$emit("col", "flex-column-wrap");
     },
-    methods: {
-        filter() {
-                        this.$emit("filtered", { ...this.filterBy })
-                    },
-        setToCol(){
-                        this.$emit("col", 'flex-column-wrap')
-                    }
+  },
+  computed: {
+    showExpansionModal() {
+      return this.isOpen ? "apps-nav-modal" : "";
     },
-    computed: {
-        showExpansionModal() {
-            return this.isOpen ? 'apps-nav-modal' : ''
-        }
-    },
-    unmounted() { },
-}
+  },
+  unmounted() {},
+};
 
-
+//<i class="fa-solid fa-grip"></i>
 
 // export default {
 //     template: `
@@ -80,7 +78,7 @@ export default {
 
 //             </nav>
 //         </header>
-    
+
 //     `,
 //        data() {
 //         return {
