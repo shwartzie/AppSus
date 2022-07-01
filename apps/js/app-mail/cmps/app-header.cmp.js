@@ -4,12 +4,12 @@ export default {
         <header class="mail-header">
             <nav class="nav-bar">
                 <div class="logo-and-hamburger">
-                    <a class="hamburger" @click="openMenu">
+                    <a class="hamburger" @click="setHamburger(isAsideOpen = !isAsideOpen)" >
                         ☰
                     </a>
-                    <div class="logo-and-mail">
+                    <a href="#/mail" class="logo-and-mail">
                         <img src="../img/logo_gmail_lockup_default_1x_rtl_r2.png" alt="">
-                    </div>
+                    </a>
                 </div>
                 <div class="mail-filter-container">
                     <mail-filter @filtered="setFilter" />
@@ -30,7 +30,8 @@ export default {
     `,
     data() {
         return {
-            isOpen: false
+            isOpen: false,
+            isAsideOpen: false
         };
     },
     created() { 
@@ -40,11 +41,14 @@ export default {
         setFilter(txt) {
             this.$emit('filtered', txt)
         },
+        setHamburger(isAsideOpen) {
+            this.$emit('asideStatus', isAsideOpen)
+        }
     },
     computed: {
         showExpansionModal() {
             return this.isOpen ? 'apps-nav-modal' : ''
-        }
+        },
     },
     unmounted() { },
     components: {

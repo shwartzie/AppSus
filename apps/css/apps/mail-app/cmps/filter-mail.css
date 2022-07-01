@@ -3,7 +3,9 @@
 
 } */
 .mail-filter-container {
-    width: 50%;
+    width: 40%;
+    margin-right: 25em;
+    
 }
 .filter-mail {
     width: 100%;
@@ -11,4 +13,5 @@
     background-color: rgba(128, 128, 128, 0.301);
     border-radius: 8px;
     padding: 5px;
+    height: 46px;
 }

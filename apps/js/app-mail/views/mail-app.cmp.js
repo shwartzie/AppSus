@@ -7,11 +7,12 @@ import { eventBus } from "../../../services/eventBus-service.js"
 export default {
     template: `
     <section class="mail-layout">
-        <app-header @filtered="setFilter"/>
+        <app-header @filtered="setFilter" @asideStatus="setAsideStatus"/>
     </section>
     <section class="mail-content-container">
         <mail-aside 
             :mails="mails" 
+            :asideStatus="asideStatus"
             @starred="setType" 
             @inbox="setType" 
             @sentMsg="setType"
@@ -19,7 +20,7 @@ export default {
             @archived="setType"
         />
         <mail-list v-if="mails" :mails="mailsForDisplay" @selected="onSelectedMail" @removed="removeMail" />
-        <mail-compose v-if="selectedMail"/>
+        <mail-compose v-if="selectedMail" :selectedMail="selectedMail"/>
     </section>
     `,
 
@@ -28,7 +29,9 @@ export default {
             mails: null,
             filterBy: null,
             filterByType: null,
-            selectedMail: null
+            selectedMail: null,
+            asideStatus: true,
+            currMail: null
         };
     },
     created() {
@@ -38,7 +41,7 @@ export default {
     },
     methods: {
         setFilter(filterBy) {
-            this.filterBy = filterBy;
+            this.filterBy = filterBy
         },
         setType(type) {
             console.log(type)
@@ -48,12 +51,13 @@ export default {
             })
         },
         onSelectedMail(mail) {
+            console.log(mail)
             if (this.filterByType === 'draftedMsg') {
                 this.selectedMail = mail
             }
+
         },
         removeMail(id) {
-            console.log(id)
             mailService
                 .remove(id)
                 .then(() => {
@@ -67,6 +71,9 @@ export default {
                     throw new Error(err)
                 });
         },
+        setAsideStatus(asideStatus) {
+            this.asideStatus = asideStatus
+        }
     },
     computed: {
         mailsForDisplay() {
@@ -74,7 +81,7 @@ export default {
                 return this.mails.filter(mail => mail.isStarred)
                 
             } else if (this.filterByType === 'inbox') {
-                return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted)
+                return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted && !mail.isArchived)
 
             } else if (this.filterByType === 'sentMsg') {
                 return this.mails.filter(mail => mail.sentAt)
@@ -84,7 +91,7 @@ export default {
 
             } else if(this.filterByType === 'archived') {
                 return this.mails.filter(mail => mail.isArchived)
-            }
+            } 
             if (!this.filterBy) {
                 return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted && !mail.isArchived)
             }

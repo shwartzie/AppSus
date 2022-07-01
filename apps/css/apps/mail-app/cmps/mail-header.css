@@ -2,6 +2,9 @@
     border-bottom: grey;
     height: 56px;
     padding: 8px;
+    box-shadow: inset 1px 0 0 #dadce0, inset -1px 0 0 #dadce0,
+        0 1px 2px 0 rgba(60, 64, 67, 0.576), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    margin-bottom: 2rem;
 }
 
 .nav-bar {
@@ -38,7 +41,7 @@
     margin: auto;
 }
 
-.hamburger>* {
+.hamburger > * {
     height: 1.5rem;
     width: 1.5rem;
 }
@@ -75,9 +78,9 @@
     background: #f1f1f1;
 }
 
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
     background: #888;
-}
+} */
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
