@@ -4,7 +4,7 @@ export default {
     props: ["mails", "selectedList"],
     template: `
         <section class="mail-list">
-            <div>{{checkEmails(selectedList)}}</div>
+            <div>{{checkEmails(selectedList, mails)}}</div>
             <ul class="mail-ul">
                 <div  v-for="mail in mails" :key="mail.id">
                     <li class="mails-preview-container" @mouseover="mouseOver">
@@ -20,6 +20,7 @@ export default {
                                 <button @click="onDelete(mail)"><i class="fa-solid fa-trash-can"></i></button>
                                 <button @click="onArchive(mail)"><i class="fa-solid fa-box-archive"></i></button>
                                 <button @click="onRead(mail)" :class="showEnvelope(mail)"></button>
+                                <!-- <router-link v-if="mailToEdit" :to="'/keep/+mail.id'">sendToKeep</router-link> -->
                             </div>
                         </div>
                     </li>
@@ -31,7 +32,8 @@ export default {
         return {
             starId: null,
             isHover: false,
-            list: null
+            list: null,
+            mailToEdit: null
         };
     },
     created() {
@@ -69,17 +71,26 @@ export default {
         showEnvelope(mail) {
             return mail.isRead ? 'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
         },
-        checkEmails(list) {
-            if (list === 'inbox') {
+        checkEmails(list, mails) {
+            if (list === 'inbox' && !mails.length) {
                 return 'Sorry There is no mails in this mailbox'
-            } else if (list === 'starred') {
+            } else if (list === 'starred' && !mails.length) {
                 return 'Sorry, No starred emails were found. In order to have starred emails please mark them in the Inbox'
-            } else if (list === 'draftedMsg') {
+            } else if (list === 'draftedMsg' && !mails.length) {
                 return 'Sorry, No drafted emails were found. In order to have drafted emails you will have to have unfinishied Composer'
-            } else if (list === 'sentMsg') {
+            } else if (list === 'sentMsg' && !mails.length) {
                 return 'Sorry, No emails were sent. You will see them as here as soon as they will be sent!'
-            } else if (list === 'archived') {
+            } else if (list === 'archived' && !mails.length) {
                 return 'Sorry, No emails were archived. In order to have archived emails please mark them in the Inbox'
+            }
+        },
+        showSaveAsNote() { 
+            const id = this.$route.params.mailId
+            console.log(id)
+            if (id) {
+                mailService.get(id).then((mail) => (this.mailToEdit = mail))
+            } else {
+                this.mailToEdit = mailService.getEmptyMail()
             }
         }
 

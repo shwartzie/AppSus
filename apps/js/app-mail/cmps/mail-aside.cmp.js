@@ -13,8 +13,8 @@ export default {
             :isOpen="isOpen"
             @open="setComposeModal"
             />
-            <div class="mail-compose" @click="isOpen = !isOpen">
-                <div class="compose-logo">
+            <div :class="showCollapsedLogo" @click="isOpen = !isOpen">
+                <div class="compose-logo" :class="collapseLogo">
                 </div>
                 <a class="compose-btn" >Compose</a>
             </div>
@@ -113,6 +113,12 @@ export default {
         },
         showAside() {
             return this.asideStatus ? 'aside-expanded' : 'aside-collapsed'
+        },
+        showCollapsedLogo() {
+            return this.asideStatus ? 'mail-compose' : 'mail-compose-collapsed'
+        },
+        collapseLogo() {
+            return this.asideStatus ? 'compose-logo' : 'compose-logo-collapsed'
         }
         
     },

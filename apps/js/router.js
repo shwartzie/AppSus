@@ -34,6 +34,9 @@ const routes = [
         path: '/keep',
         component: keepApp
     },
+    {
+        path: '/keep/:mailId',
+    }
 ]
 
 export const router = VueRouter.createRouter({
