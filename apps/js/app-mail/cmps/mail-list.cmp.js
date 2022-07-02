@@ -4,7 +4,7 @@ export default {
     props: ["mails", "selectedList"],
     template: `
         <section class="mail-list">
-            <div>{{checkEmails(selectedList)}}</div>
+            <div>{{checkEmails(selectedList, mails)}}</div>
             <ul class="mail-ul">
                 <div  v-for="mail in mails" :key="mail.id">
                     <li class="mails-preview-container" @mouseover="mouseOver">
@@ -69,16 +69,16 @@ export default {
         showEnvelope(mail) {
             return mail.isRead ? 'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
         },
-        checkEmails(list) {
-            if (list === 'inbox') {
+        checkEmails(list, mails) {
+            if (list === 'inbox' && !mails.length) {
                 return 'Sorry There is no mails in this mailbox'
-            } else if (list === 'starred') {
+            } else if (list === 'starred' && !mails.length) {
                 return 'Sorry, No starred emails were found. In order to have starred emails please mark them in the Inbox'
-            } else if (list === 'draftedMsg') {
+            } else if (list === 'draftedMsg' && !mails.length) {
                 return 'Sorry, No drafted emails were found. In order to have drafted emails you will have to have unfinishied Composer'
-            } else if (list === 'sentMsg') {
+            } else if (list === 'sentMsg' && !mails.length) {
                 return 'Sorry, No emails were sent. You will see them as here as soon as they will be sent!'
-            } else if (list === 'archived') {
+            } else if (list === 'archived' && !mails.length) {
                 return 'Sorry, No emails were archived. In order to have archived emails please mark them in the Inbox'
             }
         }

@@ -31,7 +31,6 @@ export default {
             filterByType: null,
             selectedMail: null,
             asideStatus: true,
-            currMail: null
         };
     },
     created() {
