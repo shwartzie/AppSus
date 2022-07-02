@@ -13,6 +13,7 @@
 @import "../typography.css";
 @import "./keep-app/parts/main-keep.css";
 @import "../apps/mail-app/mq/phone-preview/mail-mobile.css";
+@import '../apps/mail-app/mq/tablet-preview/mail-tablet.css';
 body {
     height: 100vh;
     color: #202124;
