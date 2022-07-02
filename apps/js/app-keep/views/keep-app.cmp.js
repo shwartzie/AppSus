@@ -32,7 +32,8 @@ export default {
     keepAdd,
   },
   created() {
-    keepService.query().then((keeps) => {
+    keepService.query()
+    .then((keeps) => {
       this.keeps = keeps
 
     });

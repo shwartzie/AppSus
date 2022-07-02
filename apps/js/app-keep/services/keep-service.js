@@ -72,6 +72,7 @@ function _createKeeps() {
         id:101,
         bgColor:randomBC(),
         isPinned:false,
+        labels:[],
         
       },
       {
@@ -80,7 +81,8 @@ function _createKeeps() {
         contentOfType:'https://www.youtube.com/embed/tgbNymZ7vqY',
         id:102,
         bgColor:randomBC(),
-        isPinned:false
+        isPinned:false,
+        labels:[],
       },
       {
         title:'ooga booga',
@@ -88,7 +90,8 @@ function _createKeeps() {
         contentOfType:'https://i.pinimg.com/474x/b6/0f/20/b60f20b811cbe9a73bfbc2658ff53b74.jpg',
         id:103,
         bgColor:randomBC(),
-        isPinned:false
+        isPinned:false,
+        labels:[],
       },
       {
         title:'on god',
@@ -96,7 +99,8 @@ function _createKeeps() {
         type:'todo',
         id:104,
         bgColor:randomBC(),
-        isPinned:false
+        isPinned:false,
+        labels:[],
       },
     ]
 
@@ -123,7 +127,7 @@ function _createTodos() {
 }
 
 function randomBC(){
-  return Math.floor(Math.random()*16777215).toString(16);
+  return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 
 }
 
