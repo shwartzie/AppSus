@@ -51,10 +51,12 @@ export default {
         });
     },
     addkeep(keep) {
+      if (!keep.title) return
       if (keep.type === "todo" && !keep.bgColor) keep.contentOfType = this.addTodoKeep(keep)
       if (!keep.bgColor) keep.bgColor = keepService.randomBC()
       keepService.save(keep).then(() => {
         this.keeps.push(keep)
+        this.keeps = this.renderStarredFirst()
         console.log('hi');
         // eventBus.emit("show-msg", { txt: "Saved/Update successfully", type: "success" })
       })

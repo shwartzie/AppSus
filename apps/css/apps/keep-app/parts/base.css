@@ -153,21 +153,24 @@ cite {
   -moz-box-shadow: 0px 0px 5px 4px rgba(74, 74, 74, 0.46);
   background-color: rgba(170, 170, 170, 0.332);
 }
-.keep-add-actions{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    padding: 1rem;
+.keep-add-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  padding: 1rem;
 }
-.empty-thumbtack{
-    position:absolute;
-    float: right;
-    left: 70vw;
-    top: 5px;
-    height: fit-content;
-    width: fit-content;
+.empty-thumbtack {
+  position: absolute;
+  float: right;
+  left: 70vw;
+  top: 5px;
+  height: fit-content;
+  width: fit-content;
 }
 [contenteditable] {
-    outline: 0px solid transparent;
-  }
+  outline: 0px solid transparent;
+}
+.isPinned{
+    color: rgb(198, 198, 48);
+}

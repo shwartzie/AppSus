@@ -1,3 +1,4 @@
+import { mailService } from "../../app-mail/services/mail-service.js";
 
 export default {
     template: `
@@ -5,7 +6,7 @@ export default {
             <div class="inputs">
             <!-- clear on click, when repressing the title its reset error -->
             <p class="new-keep-title keep-input" contenteditable="true" ref="titleInput" @input="changeTitle()" @click="openType('text')" >
-                start a new keep
+                {{startingTitle()}}
             </p>
                     <div v-if="keep.type" >
                     <p class="keep-input" contenteditable="true" v-if="keep.type === 'img'"  ref="imgInput" @input="inputImgUrl(value)">
@@ -32,7 +33,7 @@ export default {
                         <button class="keep-btn" @click="save">Add</button>
                     </div>
                     </div>
-                    <button class="keep-btn empty-thumbtack"><i class="fa-solid fa-thumbtack"></i></button>
+                    <button class="keep-btn empty-thumbtack"  @click="isPinned()"><i class="fa-solid fa-thumbtack" :class="colorPinned"></i></button>
 
             </div>   
                     
@@ -45,31 +46,42 @@ export default {
                 title: '',
                 type: '',
                 contentOfType: '',
-
-            }
+            },
+            emailId: '',
         };
     },
-    created() { },
+    created() {
+        const id = this.$route.params.bookId
+        console.log(id);
+        if (id) {
+            const mail = mailService.get(id)
+            console.log(id);
+            this.keep.title = mail.subject,
+                this.keep.type = 'text',
+                this.keep.contentOfType = mail.body
+        }
+    },
     methods: {
         openType(type) {
+            // if (this.keep.type===) {
+
+            // }
             this.keep.type = type
         },
         save() {
-            if (this.keep.type) {
             this.$emit("add", this.keep)
-            this.keep={
+            this.keep = {
                 title: '',
                 type: '',
                 contentOfType: '',
-                isPinned:false,
+                isPinned: false,
 
-            }}
+            }
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
         },
         inputFreeText() {
-            this.keep.type = 'text'
             this.keep.contentOfType = this.$refs.freeTxtInput.innerText
         },
         inputImgUrl() {
@@ -80,11 +92,24 @@ export default {
         },
         inputTodoList() {
             this.keep.contentOfType = this.$refs.todoInput.innerText
-            
+
+        },
+        isPinned() {
+            console.log('hi');
+            this.keep.isPinned = !this.keep.isPinned
+        },
+        startingTitle(titleTxt = 'start a new keep') {
+            if (this.keep.title) return `${this.keep.title}`
+            return `start a new keep`
         },
         //do better
     },
-    computed: {},
+    computed: {
+        colorPinned() {
+            return (this.keep.isPinned ? 'isPinned' : '')
+        },
+
+    },
     mounted() { },
     unmounted() { },
     components: {},
