@@ -42,6 +42,7 @@ function getEmptyMail() {
     isRead: false,
     sentAt: null,
     to: '',
+    by: '',
     isDrafted: false,
     isChecked: false,
     isArchived: false
@@ -56,6 +57,7 @@ function _createMail
     isRead = false,
     sentAt = null,
     to = 'momo@momo.com',
+    by = 'roniShwarzman@caMay22.com',
     isStarred = false,
     isChecked = false,
     isArchived = false,
@@ -68,6 +70,7 @@ function _createMail
         isRead,
         sentAt,
         to,
+        by,
         isStarred,
         isChecked,
         isArchived,

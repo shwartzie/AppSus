@@ -5,6 +5,7 @@ import bookDetails from "./app-book/views/book-details.cmp.js"
 import bookEdit from "./app-book/views/book-edit.cmp.js"
 import mailApp from './app-mail/views/mail-app.cmp.js'
 import keepApp from './app-keep/views/keep-app.cmp.js'
+import mailDisplay from "./app-mail/cmps/mail-display.cmp.js"
 const routes = [
     {
         path: "/",
@@ -29,6 +30,10 @@ const routes = [
     {
         path: '/mail',
         component: mailApp
+    },
+    {
+        path: '/mail/:mailId',
+        component: mailDisplay
     },
     {
         path: '/keep',
