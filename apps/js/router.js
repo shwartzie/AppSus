@@ -36,6 +36,7 @@ const routes = [
     },
     {
         path: '/keep/:mailId',
+        component: keepApp
     }
 ]
 

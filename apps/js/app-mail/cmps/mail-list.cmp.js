@@ -20,7 +20,7 @@ export default {
                                 <button @click="onDelete(mail)"><i class="fa-solid fa-trash-can"></i></button>
                                 <button @click="onArchive(mail)"><i class="fa-solid fa-box-archive"></i></button>
                                 <button @click="onRead(mail)" :class="showEnvelope(mail)"></button>
-                                <!-- <router-link v-if="mailToEdit" :to="'/keep/+mail.id'">sendToKeep</router-link> -->
+                                <router-link :to="'/keep/'+mail.id">sendToKeep</router-link>
                             </div>
                         </div>
                     </li>
