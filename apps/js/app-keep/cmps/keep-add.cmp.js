@@ -2,8 +2,8 @@ import { mailService } from "../../app-mail/services/mail-service.js";
 
 export default {
     template: `
-    <section class="keep-inputs">  
-            <div class="inputs">
+    <section class="keep-inputs flex">  
+            <div class="inputs flex">
             <!-- clear on click, when repressing the title its reset error -->
             <p class="new-keep-title keep-input" contenteditable="true" ref="titleInput" @input="changeTitle()" @click="openType('text')" >
                 {{startingTitle()}}
@@ -18,12 +18,12 @@ export default {
                     </p>
                 
                     <p class="free-text-input keep-input" contenteditable="true" ref="freeTxtInput" @input="inputFreeText()" v-else-if="keep.type === 'text'">
-                      text
+                      {{startingTxt()}}
                     </p>
                     <p  class="new-keep-title keep-input" v-else-if="keep.type === 'todo'" contenteditable="true" ref="todoInput" @input="inputTodoList()" >
                         enter a coma seperated list
                     </p>
-                    <div class="keep-add-actions">
+                    <div class="keep-add-actions flex">
                         <div >
                             <button @click="openType('text')" class="keep-btn"><i class="fa-solid fa-keyboard"></i> </button>
                             <button @click="openType('img')" class="keep-btn"><i class="fa-solid fa-image"></i></button>
@@ -51,14 +51,22 @@ export default {
         };
     },
     created() {
-        const id = this.$route.params.bookId
+        const id = this.$route.params.mailId
         console.log(id);
         if (id) {
-            const mail = mailService.get(id)
-            console.log(id);
-            this.keep.title = mail.subject,
+            mailService.get(id)
+            .then((mail)=>{
+                
+                this.keep.title = `subject: ${mail.subject}`,
                 this.keep.type = 'text',
-                this.keep.contentOfType = mail.body
+                this.keep.contentOfType = `
+                to: ${mail.to},
+                <br>
+                content: ${mail.body}
+                `
+
+                console.log(mail);
+            })
         }
     },
     methods: {
@@ -69,14 +77,15 @@ export default {
             this.keep.type = type
         },
         save() {
-            this.$emit("add", this.keep)
+            this.$emit("add", {...this.keep})
             this.keep = {
                 title: '',
                 type: '',
                 contentOfType: '',
                 isPinned: false,
-
             }
+            this.$router.push("/keep")
+
         },
         changeTitle() {
             this.keep.title = this.$refs.titleInput.innerText
@@ -98,11 +107,14 @@ export default {
             console.log('hi');
             this.keep.isPinned = !this.keep.isPinned
         },
-        startingTitle(titleTxt = 'start a new keep') {
+        startingTitle() {
             if (this.keep.title) return `${this.keep.title}`
             return `start a new keep`
         },
-        //do better
+        startingTxt() {
+            if (this.keep.contentOfType) return `${this.keep.contentOfType}`
+            return `text`
+        },
     },
     computed: {
         colorPinned() {

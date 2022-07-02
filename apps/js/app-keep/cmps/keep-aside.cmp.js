@@ -1,6 +1,6 @@
 export default {
   template: `
-  <div class="side-bar-keep">
+  <div class="side-bar-keep flex">
     <a class="btn" href="#">Compose</a>
     <a class="btn" href="#">starred</a>
     <a class="btn" href="#">sent</a>

@@ -10,6 +10,7 @@
 @import "./mail-app/cmps/mail-list.css";
 @import "./mail-app/cmps/mail-compose.css";
 @import "../typography.css";
+@import "./keep-app/parts/main-keep.css";
 body {
     height: 100vh;
     color: #202124;
