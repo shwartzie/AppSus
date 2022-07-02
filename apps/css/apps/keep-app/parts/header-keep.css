@@ -27,3 +27,6 @@
   height: max-content;
   padding: 8px;
 }
+.keep-btn.change-dir{
+    padding: 0;
+}

@@ -67,5 +67,7 @@
     
     .mail-body {
         padding-left: 1.5em;
+        width: 45%;
+        min-width: 0;
     }
 }
