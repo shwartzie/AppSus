@@ -33,7 +33,7 @@ function post(entityType, newEntity) {
 //create new items
 function postMany(entityType, newEntities) {
   return query(entityType).then((entities) => {
-    entities=newEntities;
+    entities = newEntities;
     _save(entityType, entities);
     return entities;
   });
@@ -49,12 +49,12 @@ function put(entityType, updatedEntity) {
   });
 }
 function postStarred(entityType, newEntity) {
-    return query(entityType).then((entities) => {
-      entities.unshift(newEntity);
-      -(entityType, entities);
-      return newEntity;
-    });
-  }
+  return query(entityType).then((entities) => {
+    entities.unshift(newEntity);
+    -(entityType, entities);
+    return newEntity;
+  });
+}
 //remove an item
 function remove(entityType, entityId) {
   return query(entityType).then((entities) => {

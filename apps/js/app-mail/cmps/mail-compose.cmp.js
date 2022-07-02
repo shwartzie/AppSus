@@ -1,8 +1,8 @@
 import {mailService} from '../services/mail-service.js'
 export default {
-    props: ['isOpen', 'selectedMail'],
+    props: ['isOpen', 'draftedMsg'],
     template: `
-    <section>
+    <section class="compose-modal">
         <div class="header-compose-modal">
             <h4>New Message</h4>
             <div class="header-functions">
@@ -29,8 +29,7 @@ export default {
     },
     created() {
         this.open = this.isOpen
-        this.mail = this.selectedMail ? {...this.selectedMail} : mailService.getEmptyMail()
-        console.log(this.mail,this.selectedMail)
+        this.mail = this.draftedMsg ? {...this.draftedMsg} : mailService.getEmptyMail()
      },
     methods: {
         onClose() {

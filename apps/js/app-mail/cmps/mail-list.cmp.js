@@ -7,21 +7,16 @@ export default {
             <div>{{checkEmails(selectedList, mails)}}</div>
             <ul class="mail-ul">
                 <div  v-for="mail in mails" :key="mail.id">
-                    <li class="mails-preview-container" @mouseover="mouseOver">
+                    <li class="mails-preview-container" :style="setSelectedBgc(mail)" @mouseover="mouseOver" >
                         <div class="mail-container">
                             <div class="mail-actions">
-                                <input class="mail-check-box" type="checkbox" v-model="isChecked" @click="setCheck(mail)"/>
+                                <input class="mail-check-box" type="checkbox" @click="setCheck(mail)"/>
                                 <button class="mail-star" :class="getActiveStarClass(mail)" @click="onStar(mail)">
                                     <i class="fa-solid fa-star"></i>
                                 </button> 
                             </div>
-                            <mail-preview :mail="mail" @selected="onSelectedMail"/>
-                            <div class="extra-mail-actions">
-                                <button @click="onDelete(mail)"><i class="fa-solid fa-trash-can"></i></button>
-                                <button @click="onArchive(mail)"><i class="fa-solid fa-box-archive"></i></button>
-                                <button @click="onRead(mail)" :class="showEnvelope(mail)"></button>
-                                <router-link :to="'/keep/'+mail.id">sendToKeep</router-link>
-                            </div>
+                            <mail-preview :mail="mail" @selected="onSelectedMail" @removed="onDelete" />
+                            
                         </div>
                     </li>
                 </div>
@@ -33,15 +28,19 @@ export default {
             starId: null,
             isHover: false,
             list: null,
-            mailToEdit: null
+            mailToEdit: null,
+            
         };
     },
     created() {
-      
+   
     },
     methods: {
         onSelectedMail(mail) {
-            this.$emit('selected', { ...mail })
+            mail.isSelected = true
+            mail.isRead = true
+            mailService.save(mail)
+            this.$emit('selected', {...mail})
         },
         onStar(mail) {
             mail.isStarred = !mail.isStarred
@@ -55,22 +54,14 @@ export default {
             this.isHover = !this.isHover
         },
         onDelete(mail) {
+            console.log(mail)
             this.$emit('removed', mail.id)
         },
-        onArchive(mail) {
-            mail.isArchived = !mail.isArchived
-            mailService.save(mail)
-        },
-        onRead(mail) {
-            mail.isRead = !mail.isRead
-            mailService.save(mail)
-        },
+
         getActiveStarClass(mail) {
             return mail.isStarred ? 'star-active' : ''
         },
-        showEnvelope(mail) {
-            return mail.isRead ? 'fa-solid fa-envelope-open' : 'fa-solid fa-envelope'
-        },
+        
         checkEmails(list, mails) {
             if (list === 'inbox' && !mails.length) {
                 return 'Sorry There is no mails in this mailbox'
@@ -86,14 +77,17 @@ export default {
         },
         showSaveAsNote() { 
             const id = this.$route.params.mailId
-            console.log(id)
             if (id) {
                 mailService.get(id).then((mail) => (this.mailToEdit = mail))
             } else {
                 this.mailToEdit = mailService.getEmptyMail()
             }
-        }
-
+        },
+        setSelectedBgc(mail) {
+            return mail.isRead ? {background: 'rgba(128, 128, 128, 0.1)'} : {background: 'white'}
+        },
+        
+        
     },
     computed: {
         

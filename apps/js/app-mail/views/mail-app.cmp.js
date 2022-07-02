@@ -9,18 +9,30 @@ export default {
     <section class="mail-layout">
         <app-header @filtered="setFilter" @asideStatus="setAsideStatus"/>
     </section>
+    
     <section class="mail-content-container">
         <mail-aside 
             :mails="mails" 
             :asideStatus="asideStatus"
+            :mailsRead="unreadMailsCount"
             @starred="setType" 
             @inbox="setType" 
             @sentMsg="setType"
             @draftedMsg="setType" 
             @archived="setType"
         />
-        <mail-list v-if="mails" :mails="mailsForDisplay" :selectedList="filterByType" @selected="onSelectedMail" @removed="removeMail" />
-        <mail-compose v-if="selectedMail" :selectedMail="selectedMail"/>
+        <mail-list 
+            v-if="mails" 
+            :mails="mailsForDisplay" 
+            :selectedList="filterByType" 
+            @selected="onSelectedMail" 
+            @removed="removeMail" 
+        />
+
+        <section v-if="draftedMsg" @click="isOpen = !isOpen">
+            <mail-compose  :draftedMsg="draftedMsg" :isOpen="isOpen" @open="setComposeModal"/>
+        </section>
+        
     </section>
     `,
 
@@ -29,13 +41,18 @@ export default {
             mails: null,
             filterBy: null,
             filterByType: null,
-            selectedMail: null,
+            draftedMsg: null,
             asideStatus: true,
+            isOpen: false,
+     
+            unreadMailsCount: 0
         };
     },
     created() {
         mailService.query().then((mails) => {
             this.mails = mails
+            const mailsRead = this.mails.filter(mail => mail.isRead)
+            this.unreadMailsCount = this.mails.length - mailsRead.length
         })
     },
     methods: {
@@ -43,17 +60,16 @@ export default {
             this.filterBy = filterBy
         },
         setType(type) {
-            console.log(type)
             mailService.query().then((mails) => {
                 this.filterByType = type
                 this.mails = mails
             })
         },
         onSelectedMail(mail) {
-            console.log(mail)
             if (this.filterByType === 'draftedMsg') {
-                this.selectedMail = mail
+                this.draftedMsg = mail
             }
+            this.mailIsSelected = mail
 
         },
         removeMail(id) {
@@ -61,7 +77,6 @@ export default {
                 .remove(id)
                 .then(() => {
                     const idx = this.mails.findIndex((mail) => mail.id === id)
-                    console.log(this.mails,idx)
                     this.mails.splice(idx, 1)
                     eventBus.emit("show-msg", { txt: "Deleted successfully", type: "success" })
                 })
@@ -72,13 +87,17 @@ export default {
         },
         setAsideStatus(asideStatus) {
             this.asideStatus = asideStatus
-        }
+        },
+        setComposeModal(isOpen) {
+            this.isOpen = isOpen
+        },
+        
     },
     computed: {
         mailsForDisplay() {
             if (this.filterByType === 'starred') {
                 return this.mails.filter(mail => mail.isStarred)
-                
+
             } else if (this.filterByType === 'inbox') {
                 return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted && !mail.isArchived)
 
@@ -88,8 +107,9 @@ export default {
             } else if (this.filterByType === 'draftedMsg') {
                 return this.mails.filter(mail => mail.isDrafted)
 
-            } else if(this.filterByType === 'archived') {
+            } else if (this.filterByType === 'archived') {
                 return this.mails.filter(mail => mail.isArchived)
+
             }
             if (!this.filterBy) {
                 return this.mails.filter(mail => !mail.sentAt && !mail.isDrafted && !mail.isArchived)
@@ -105,7 +125,7 @@ export default {
         appHeader,
         mailAside,
         mailList,
-        mailCompose
+        mailCompose,
     },
 };
 

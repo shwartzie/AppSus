@@ -7,7 +7,7 @@ export default {
                     <a class="hamburger" @click="setHamburger(isAsideOpen = !isAsideOpen)" >
                         ☰
                     </a>
-                    <a href="#/mail" class="logo-and-mail">
+                    <a @click="onLogo" class="logo-and-mail" :style="addCursor">
                         <img src="../img/logo_gmail_lockup_default_1x_rtl_r2.png" alt="">
                     </a>
                 </div>
@@ -43,12 +43,20 @@ export default {
         },
         setHamburger(isAsideOpen) {
             this.$emit('asideStatus', isAsideOpen)
+        },
+        onLogo() {
+            window.location.reload()
         }
     },
     computed: {
         showExpansionModal() {
             return this.isOpen ? 'apps-nav-modal' : ''
         },
+        addCursor() {
+            return {
+                cursor: 'pointer'
+            }
+        }
     },
     unmounted() { },
     components: {

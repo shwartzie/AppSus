@@ -107,6 +107,7 @@
     padding: 0 26px 0 12px;
     width: 224px;
     justify-content: flex-start;
+    position: relative;
 }
 
 .aside-icon {

@@ -9,13 +9,18 @@
 @import "./mail-app/cmps/mail-preview.css";
 @import "./mail-app/cmps/mail-list.css";
 @import "./mail-app/cmps/mail-compose.css";
+@import "./mail-app/cmps/mail-display.css";
 @import "../typography.css";
+@import "../apps/mail-app/mq/phone-preview/mail-mobile.css";
 body {
     height: 100vh;
     color: #202124;
     margin: auto;
 }
 
+button {
+    cursor: pointer;
+}
 .mail-layout {
     width: 100%;
     max-width: 100%;

@@ -1,8 +1,9 @@
 import { mailService } from "../services/mail-service.js";
 import mailCompose from "../cmps/mail-compose.cmp.js"
 export default {
-    props: ['mails','asideStatus'],
+    props: ['mails','asideStatus','mailsRead'],
     template: `
+ 
      <aside class="aside" :class="showAside">
         <div class="aside-funcs">
             <mail-compose 
@@ -19,10 +20,12 @@ export default {
                 <a class="compose-btn" >Compose</a>
             </div>
             <div class="mail-aside-btns btn-mail-aside" :class="showSelectedList('inbox')" @click="noFilter">
-                <div class="aside-icon">
+                <div class="aside-icon" >
                     <i class="fa-solid fa-inbox"></i>
                 </div>
-                <a>Inbox</a>
+                <a >Inbox</a>
+                <p style="margin-left: 50%">{{mailsRead}}</p>
+                <p v-if="!asideStatus" style="position:absolute; left:35px; top:0;">{{mailsRead}}</p>
             </div>
 
             <div class="mail-aside-btns btn-mail-aside" :class="showSelectedList('starred')"  @click="filterByStarred">
@@ -63,10 +66,11 @@ export default {
             mail: null,
             isOpen: false,
             active: false,
-            selectedList: null
+            selectedList: null,
         };
     },
-    created() { },
+    created() {
+     },
     methods: {
         noFilter() {
             this.selectedList = 'inbox'
