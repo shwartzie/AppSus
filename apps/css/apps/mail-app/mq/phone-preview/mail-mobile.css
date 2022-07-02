@@ -1,4 +1,6 @@
-@media (max-width:600px) {
+
+
+@media (max-width:800px) {
     .logo-and-mail {
         display: none;
     }
@@ -9,7 +11,6 @@
     .filter-mail {
         width: 100%;
         text-align: center;
-        max-width: 370px;
     }
 
     .hamburger {
@@ -28,7 +29,6 @@
 
     .mail-list {
         width: 90%;
-        min-width: 490px;
         overflow: scroll;
         overflow-x: hidden;
         height: 100vh;
@@ -39,19 +39,19 @@
         height: 10px;
     }
 
-    .compose-modal {
-        /* max-width: 200px; */
+    /* .compose-modal { */
+        /* max-width: 200px; /
         background-color: #0d1018;
         top: 75px;
         width: 100%;
-    }
+    /* } */
 
-    .header-function > * {
+    .header-function > {
         color: white; 
     }
 
     .aside {
-        min-width: 45px;
+        max-width: 45px;
     }
 
     .mails-preview-container {
@@ -63,11 +63,26 @@
     }
     .mail-subject {
         height: 55px;
+        width: 50px;
     }
-    
+
     .mail-body {
         padding-left: 1.5em;
         width: 45%;
         min-width: 0;
+    }
+
+    .hidden {
+        opacity: 1;
+    }
+
+    .mail {
+        justify-content: space-around;
+    }
+
+    .apps-nav-modal {
+        position: absolute;
+        top: 15px;
+        left: 10px;
     }
 }
