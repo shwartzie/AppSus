@@ -11,11 +11,8 @@
 @import "./mail-app/cmps/mail-compose.css";
 @import "./mail-app/cmps/mail-display.css";
 @import "../typography.css";
-<<<<<<< HEAD
 @import "./keep-app/parts/main-keep.css";
-=======
 @import "../apps/mail-app/mq/phone-preview/mail-mobile.css";
->>>>>>> 6fd688cd0844c8a2150b8d35011115c62f4a1701
 body {
     height: 100vh;
     color: #202124;
