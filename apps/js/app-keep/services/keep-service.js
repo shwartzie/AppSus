@@ -111,7 +111,6 @@ function createTodo(txt) {
       txt,
       isDone: false,
   }
-  console.log(todo);
   return todo
 }
 

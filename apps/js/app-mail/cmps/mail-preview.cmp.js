@@ -7,7 +7,7 @@ export default {
             <div class="mail-subject" >
                 To: {{mail.to}} 
             </div>
-            <div class="mail-body" @click="selectedMail(mail,selected = !selected)">
+            <div class="mail-body" @click="selectedMail(mail)">
                 <long-text :text="mail.body"/>
             </div>
         </div>
@@ -16,7 +16,7 @@ export default {
             <div class="mail-subject">
                 {{mail.subject}} 
             </div>
-            <div class="mail-body" @click="selectedMail(mail,selected = !selected)">
+            <div class="mail-body" @click="selectedMail(mail)">
                 <long-text :text="mail.body"/>
             </div>
         </div>
@@ -29,8 +29,8 @@ export default {
     },
     created() { },
     methods: {
-        selectedMail(mail, selected) {
-            this.selected = selected
+        selectedMail(mail) {
+            mail.isSelected = !mail.isSelected
             this.$emit('selected', {...mail})
         },
     },

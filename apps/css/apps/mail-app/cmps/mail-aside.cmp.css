@@ -4,6 +4,7 @@
     margin-right: 0.2em;
     overflow: hidden;
     width: 220px;
+    transition: width 0.35s ease;
 }
 
 .aside, .aside-funcs {
@@ -21,7 +22,8 @@
 .mail-compose {
     border-radius: 1.5em;
     margin-bottom: 1.2rem;
-    width: 125px;
+    width: 100%;
+    max-width: 125px;
     padding-right: 1.5em;
     font-size: .875rem;
     border: 1px black solid;
@@ -33,7 +35,14 @@
     border: none;
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
     transition:  background-color 0.5s ease;
-    
+}
+
+.mail-compose-collapsed {
+    width: 2.5rem;
+    border-radius: 1.5em;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+    margin-bottom: 1.2rem;
+    transition: width 0.2s linear;
 }
 
 .mail-compose:hover {
@@ -45,10 +54,18 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 32px;
-    content: "";
     display: block;
-    height: 48px;
+    height: 3rem;
     min-width: 56px;
+}
+.compose-logo-collapsed {
+    background-image: url('../../../../img/compose-logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 1.75rem;
+    display: block;
+    height:  3rem;
+    min-width: 2.5rem;
 }
 
 .btn-mail-aside {
@@ -109,4 +126,6 @@
 
 .aside-collapsed {
     width: 45px;
+    transition: width 0.35s ease;
+    height: 227px;
 }

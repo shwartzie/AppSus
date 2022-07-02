@@ -20,6 +20,7 @@ export default {
                                 <button @click="onDelete(mail)"><i class="fa-solid fa-trash-can"></i></button>
                                 <button @click="onArchive(mail)"><i class="fa-solid fa-box-archive"></i></button>
                                 <button @click="onRead(mail)" :class="showEnvelope(mail)"></button>
+                                <!-- <router-link v-if="mailToEdit" :to="'/keep/+mail.id'">sendToKeep</router-link> -->
                             </div>
                         </div>
                     </li>
@@ -31,7 +32,8 @@ export default {
         return {
             starId: null,
             isHover: false,
-            list: null
+            list: null,
+            mailToEdit: null
         };
     },
     created() {
@@ -80,6 +82,15 @@ export default {
                 return 'Sorry, No emails were sent. You will see them as here as soon as they will be sent!'
             } else if (list === 'archived' && !mails.length) {
                 return 'Sorry, No emails were archived. In order to have archived emails please mark them in the Inbox'
+            }
+        },
+        showSaveAsNote() { 
+            const id = this.$route.params.mailId
+            console.log(id)
+            if (id) {
+                mailService.get(id).then((mail) => (this.mailToEdit = mail))
+            } else {
+                this.mailToEdit = mailService.getEmptyMail()
             }
         }
 

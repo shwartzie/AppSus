@@ -57,7 +57,9 @@ function _createMail
     sentAt = null,
     to = 'momo@momo.com',
     isStarred = false,
-    isChecked = false
+    isChecked = false,
+    isArchived = false,
+    isSelected = false
   ) {
     return {
         id,
@@ -67,7 +69,9 @@ function _createMail
         sentAt,
         to,
         isStarred,
-        isChecked
+        isChecked,
+        isArchived,
+        isSelected
     }
    
 }
