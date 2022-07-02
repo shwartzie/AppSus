@@ -14,7 +14,7 @@
     display: block;
     padding: 0;
     width:100%;
-    height: 625px;
+    height: 85vh;
 }
 
 .mail-check-box {
@@ -31,6 +31,8 @@
     display: flex;
     justify-content: space-between;
     width: calc(100% - 220px);
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .aside-collapsed-wrapper .mail-list{

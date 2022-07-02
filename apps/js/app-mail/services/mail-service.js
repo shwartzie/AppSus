@@ -83,7 +83,7 @@ function _createMails() {
   let mails = utilService.loadFromStorage(MAILS_KEY);
   if (!mails || !mails.length) {
     let mails = []
-    for(let i = 0; i < 15; i++) {
+    for(let i = 0; i < 40; i++) {
       mails.push(_createMail())
     }
     utilService.saveToStorage(MAILS_KEY, mails);
