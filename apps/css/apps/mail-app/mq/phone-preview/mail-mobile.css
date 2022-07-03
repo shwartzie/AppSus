@@ -92,7 +92,7 @@
 
 @media (max-width:350px) {
     .mails-preview-container {
-        height: 225px;
+        height: 250px;
     }
 
     .mail-actions {
@@ -101,5 +101,9 @@
 
     .mail-subject {
         width: 30px;
+    }
+
+    .extra-mail-actions {
+        flex-direction: column;
     }
 }
