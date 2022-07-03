@@ -89,6 +89,11 @@
     }
 
 }
+@media (max-width: 550px) {
+    .mail-actions {
+        flex-direction: column;
+    }
+}
 
 @media (max-width: 450px) {
     .compose-modal {
