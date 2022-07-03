@@ -170,3 +170,11 @@ li.book-preview-container{
 .actions>*{
     margin: 5px;
 }
+.home-nav-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+.home-nav-buttons>*{
+    font-size: 2rem;
+    padding: 5px;
+}
