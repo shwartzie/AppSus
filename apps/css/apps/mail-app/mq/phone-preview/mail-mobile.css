@@ -94,6 +94,10 @@
     .compose-modal {
         width: 100vw;
     }
+
+    .mail-actions {
+        flex-direction: column;
+    }
 }
 
 @media (max-width:350px) {
