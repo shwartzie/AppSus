@@ -3,16 +3,19 @@ import appFooter from "../cmps/app-footer.cmp.js";
 export default {
   template: `
  <section class="home-page app-main">
-    <app-header />
-    <h3>Home sweet home</h3>
-    <!-- <img src="img/homeScreen.gif" alt="" class="home-img"> -->
-    <div class="home-nav">
-
-        <router-link to="/book"><i class="fa-solid fa-book"></i></router-link>
+    <header>
+    <router-link to="/book"><i class="fa-solid fa-book"></i></router-link>
         <router-link to="/about"><i class="fa-solid fa-address-card"></i></router-link>
         <router-link to="/mail"><i class="fa-solid fa-envelopes-bulk"></i></router-link>
         <router-link to="/keep"><i class="fa-solid fa-folder"></i></router-link>
-    </div>
+    </header>
+    <h3>Home sweet home</h3>
+    <router-link to="/book">s</router-link>
+    <!-- <img src="img/homeScreen.gif" alt="" class="home-img"> -->
+    <!-- <div class="home-nav">
+
+
+    </div> -->
 
  </section>
 `,

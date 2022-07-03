@@ -157,3 +157,16 @@ div .book {
 .home-img{
     width: 100%;
 }
+.nav-bar-books{
+    display: flex;
+    justify-content: flex-end;
+}
+li.book-preview-container{
+    list-style:none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.actions>*{
+    margin: 5px;
+}
