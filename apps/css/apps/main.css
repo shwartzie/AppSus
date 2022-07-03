@@ -39,7 +39,7 @@ button {
 }
 
 .app-main {
-    height: 90vh;
+    height: 100vh;
     background-color: lightcyan;
 }
 .router-link-exact-active {
@@ -115,7 +115,11 @@ div .book {
     height: auto;
 }
 .home-page {
+    background-image: url("../../img/homeScreen.gif");
     text-align: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .book-detail {
@@ -136,4 +140,20 @@ div .book {
     max-width: 200px;
     padding: 0;
     margin: 0;
+}
+
+.nav-bar.home-page{
+    justify-content: flex-end;
+}
+.home-nav{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 6vh;
+}
+.home-nav >*{
+    font-size: 3rem;
+    padding: 5px;
+}
+.home-img{
+    width: 100%;
 }
